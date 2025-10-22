@@ -1,0 +1,337 @@
+/* styles.css - ChefOS Custom Styles */
+
+:root {
+    /* Light Mode Palette */
+    --bg-light: #f8f9fa;
+    --card-light: #ffffff;
+    --border-light: #e9ecef;
+    --text-title-light: #1f2937;
+    --text-p-light: #495057;
+    --btn-special-bg-light: #1eb854;
+    --btn-special-text-light: #ffffff;
+    
+    /* Brand Colors (from ChefOS Forest Theme) */
+    --brand-green: #46cf78;
+    --brand-green-hover: #3bbf6b;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Manrope', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-light);
+    color: var(--text-p-light);
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--text-title-light); font-weight: 700; }
+.main-card { background-color: var(--card-light); border-color: var(--border-light); }
+.main-button { background-color: var(--card-light); border-color: var(--border-light); color: var(--text-title-light); }
+.main-button:hover { background-color: #f8f9fa; }
+.special-button { background-color: var(--btn-special-bg-light); color: var(--btn-special-text-light); }
+.special-button:hover { background-color: var(--brand-green-hover); }
+.header { background-color: rgba(255, 255, 255, 0.7); border-color: var(--border-light); backdrop-filter: blur(10px); }
+.header a { color: var(--text-title-light); }
+.integration-logo i { color: var(--brand-green); }
+.logo-text { color: var(--text-title-light); }
+
+/* Glow Button Effect */
+.glow-btn { position: relative; overflow: hidden; transition: all 0.3s ease; transform: translateZ(0); }
+.glow-btn:active { transform: scale(0.97); transition-duration: 0.1s; }
+.glow-btn::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: radial-gradient(circle, var(--brand-green) 0%, rgba(30, 184, 84, 0) 70%);
+    border-radius: 50%; transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none; opacity: 0; z-index: 0;
+}
+.glow-btn:hover::before { width: 250px; height: 250px; opacity: 0.3; }
+.glow-btn > * { position: relative; z-index: 1; }
+
+/* Pro Plan Card */
+.creator-pro-card { background: var(--brand-green); position: relative; transition: all 0.3s ease; }
+.creator-pro-card .content-wrapper { background-color: var(--card-light); transition: background-color 0.3s ease; }
+.creator-pro-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 0 40px rgba(30, 184, 84, 0.3); }
+.creator-pro-card::after {
+    content: ''; position: absolute; inset: -5px; background: var(--brand-green);
+    filter: blur(25px); z-index: -1; opacity: 0.5; transition: opacity 0.3s ease;
+}
+.creator-pro-card:hover::after { opacity: 0.7; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #dde; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-green); }
+
+/* Background Blob Animation */
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob { animation: blob 7s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Header & Nav */
+header nav { transition: padding 0.3s ease-in-out; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+header.header-scrolled nav { padding-top: 1rem; padding-bottom: 1rem; }
+.header .header-cta { background-color: var(--brand-green); color: #fff; }
+
+/* Logo Icon */
+.logo-icon { 
+    position: relative; 
+    width: 1em; 
+    height: 1em; 
+    color: var(--brand-green);
+    font-size: 1.25em;
+}
+
+/* FAQ Section */
+.faq-item .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+}
+.faq-item.active .faq-answer {
+    max-height: 20rem; /* 320px */
+}
+.faq-item .faq-icon { transition: transform 0.3s ease-in-out; color: var(--brand-green); }
+.faq-item.active .faq-icon { transform: rotate(45deg); }
+.faq-item button h3 { color: var(--text-p-light); transition: color 0.3s ease; }
+.faq-item button:hover h3 { color: var(--text-title-light); }
+.faq-item .particle-container .particle, .pricing-card .particle-container .particle { background: rgba(30, 184, 84, 0.3); } /* Dimmer particles */
+
+/* Testimonials */
+.scroller {
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+.scroller__inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem; /* space-x-6 */
+    width: max-content;
+}
+.scroller[data-animated="true"] {
+    overflow: hidden;
+}
+.scroller[data-animated="true"] .scroller__inner {
+    animation: scroll linear infinite;
+    animation-duration: var(--_animation-duration, 40s);
+    animation-direction: var(--_animation-direction, forwards);
+}
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+.testimonial-card {
+     background-color: #fdfdfd;
+}
+.testimonial-logo {
+    color: var(--text-title-light);
+}
+
+/* Scroll Animations */
+.fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+
+/* --- Pattern Background Styles --- */
+.pattern-container {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Place it behind content (which should be z-10) */
+    overflow: hidden;
+    mask-image: linear-gradient( to bottom, transparent 0%, black 15%, black 85%, transparent 100% );
+    -webkit-mask-image: linear-gradient( to bottom, transparent 0%, black 15%, black 85%, transparent 100% );
+}
+.pattern-container img {
+    position: absolute;
+    will-change: transform, opacity;
+    height: auto; /* Maintain aspect ratio */
+    
+    /* --- FIXED: Added filter to colorize SVGs to #46cf78 --- */
+    /* This filter is auto-generated to target the specific hex code */
+    filter: invert(65%) sepia(85%) saturate(541%) hue-rotate(85deg) brightness(97%) contrast(79%);
+}
+
+/* Re-style FAQ item SVGs to green */
+.faq-item .faq-svg-icon {
+    filter: invert(47%) sepia(76%) saturate(399%) hue-rotate(85deg) brightness(95%) contrast(89%); /* Target the brand green */
+    opacity: 0.5;
+}
+
+/* ========== ANIMATIONS & MICROINTERACTIONS ========== */
+
+/* Toolkit Card Hover Effects */
+.toolkit-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: visible;
+}
+
+.toolkit-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, var(--brand-green), #46cf78);
+    border-radius: 18px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.toolkit-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(30, 184, 84, 0.2);
+}
+
+.toolkit-card:hover::before {
+    opacity: 0.6;
+}
+
+.toolkit-card .icon-container {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toolkit-card:hover .icon-container {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.toolkit-card .icon-container svg {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toolkit-card:hover .icon-container svg {
+    filter: drop-shadow(0 4px 8px rgba(30, 184, 84, 0.3));
+}
+
+/* Smooth Button Hover Effects */
+.btn-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-hover:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
+}
+
+/* Smooth Fade In Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.fade-in-up.animated {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+
+/* Icon Bounce on Hover */
+@keyframes bounce-icon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.toolkit-card:hover svg {
+    animation: bounce-icon 0.6s ease;
+}
+
+/* Particle Effect Container */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Dashboard Mockup - Optimized for performance */
+.dashboard-mockup {
+    will-change: opacity;
+}
+
+/* Sidebar item hover */
+.sidebar-item {
+    transition: all 0.2s ease;
+}
+
+.sidebar-item:hover {
+    transform: translateX(3px);
+}
+
+/* Pulse Animation for CTA Buttons */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(30, 184, 84, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(30, 184, 84, 0);
+    }
+}
+
+.pulse-on-hover:hover {
+    animation: pulse-glow 2s infinite;
+}
+
+/* Card Shine Effect */
+.card-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: rotateZ(60deg) translate(-5em, 7.5em);
+    transition: transform 0.6s ease;
+}
+
+.card-shine:hover::after {
+    transform: rotateZ(60deg) translate(1em, -9em);
+}
+
+/* Footer Logo Size Increase */
+#footer-logo {
+    height: 1.75rem !important;
+    width: auto !important;
+    transform: scale(1.15);
+}
+

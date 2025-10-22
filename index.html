@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefOS - Your Kitchen, Organized. Instantly.</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/a2e0a4d3f1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/rough@4.6.6/dist/rough.umd.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body class="overflow-x-hidden">
+    
+    <header class="header fixed top-0 left-0 w-full z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex-1 flex justify-start">
+                <a href="#" class="text-2xl font-bold logo-text flex items-center gap-3">
+                    <img src="ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
+                    <span>ChefOS</span>
+                </a>
+            </div>
+            <div class="hidden md:flex justify-center items-center space-x-8 font-medium">
+                <a href="#features" class="hover:text-gray-900 transition-colors duration-300">Features</a>
+                <a href="./pages/pricing/index.html" class="hover:text-gray-900 transition-colors duration-300">Pricing</a>
+                <a href="./pages/faq/index.html" class="hover:text-gray-900 transition-colors duration-300">FAQ</a>
+                <a href="./pages/help/index.html" class="hover:text-gray-900 transition-colors duration-300">Help</a>
+                <a href="#contact" class="hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+            <div class="flex-1 flex justify-end items-center space-x-2">
+                <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-5 py-2 rounded-full font-medium text-sm header-cta hidden md:inline-flex">
+                    Dashboard
+                </a>
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-50 hidden">
+            <!-- Background overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-50" onclick="toggleMobileMenu()"></div>
+            
+            <!-- Menu panel -->
+            <div class="absolute left-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out">
+                <div class="h-full flex flex-col">
+                    <!-- Mobile menu header -->
+                    <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                        <a href="#" class="text-2xl font-bold logo-text flex items-center gap-3">
+                            <img src="ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
+                            <span>ChefOS</span>
+                        </a>
+                        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile menu navigation -->
+                    <nav class="flex-1 px-6 py-8">
+                        <div class="space-y-6">
+                            <a href="#features" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Features</a>
+                            <a href="./pages/pricing/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Pricing</a>
+                            <a href="./pages/faq/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">FAQ</a>
+                            <a href="./pages/help/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Help</a>
+                            <a href="#contact" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Contact</a>
+                        </div>
+                    </nav>
+                    
+                    <!-- Mobile menu CTA -->
+                    <div class="p-6 border-t border-gray-200">
+                        <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover w-full px-6 py-3 rounded-full font-semibold text-lg shadow-lg shadow-green-200 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                            Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-16">
+            <!-- Background gradient -->
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-green-50/30"></div>
+            
+            <!-- Floating decorative elements -->
+            <div class="absolute inset-0 overflow-hidden opacity-30">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full filter blur-3xl animate-blob"></div>
+                <div class="absolute top-40 right-20 w-96 h-96 bg-green-100 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-20 left-1/3 w-80 h-80 bg-green-200 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Hero Content -->
+                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                        <!-- Left Side - Hero Text -->
+                        <div class="flex-1 text-center lg:text-left lg:-mt-8">
+                            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight hero-title mb-6 mt-5 md:mt-0" style="margin-top: 5px;">
+                                Your Kitchen,<br>Organized. <span class="relative inline-block px-2 py-1" style="background: linear-gradient(135deg, #46cf78 0%, #46cf78 100%); background-size: 100% 60%; background-position: 0 60%; background-repeat: no-repeat;">Instantly.<svg id="hand-drawn-underline" class="absolute -bottom-1 left-0 w-full h-4" viewBox="0 0 200 20"></svg></span>
+                    </h1>
+                            <p class="max-w-2xl mx-auto lg:mx-0 text-lg md:text-xl text-gray-600 hero-subtitle mb-8">
+                        ChefOS is the complete kitchen management toolkit.
+                    </p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 hero-buttons">
+                                <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-200">
+                            Try ChefOS Pro
+                        </a>
+                                <a href="#features" class="glow-btn main-button btn-hover w-full sm:w-auto border px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-100">
+                            View Features
+                        </a>
+                            </div>
+                            
+                            <!-- Feature Tags -->
+                            <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-2 hidden md:flex">
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Recipe Management
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Recipe Scaler
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Menu Management
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Shopping Lists
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Market Management
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Chef Calendar
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Kitchen Calc
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    PDF Management
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Data Protection
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Ingredient Densities
+                                </a>
+                                <a href="#features" class="feature-tag bg-white border border-dashed border-gray-300 rounded-full px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-[var(--brand-green)] hover:text-white hover:border-[var(--brand-green)] transition-all duration-300 shadow-sm hover:shadow-md transform scale-95">
+                                    Data Export
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Dashboard Screenshot with Fade -->
+                        <div class="flex-1 relative flex justify-center lg:justify-start hidden md:flex">
+                            <div class="relative dashboard-mockup h-auto max-h-[600px] lg:-mr-24 mt-8 lg:mt-16 overflow-hidden">
+                                <!-- Fade overlay for right side -->
+                                <div class="absolute inset-0 bg-gradient-to-l from-white via-transparent to-transparent z-10 pointer-events-none"></div>
+                                <!-- Bottom fade overlay -->
+                                <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none"></div>
+                                
+                                <!-- Dashboard Screenshot -->
+                                <div class="relative overflow-hidden h-full">
+                                    <!-- Desktop View -->
+                                    <div class="hidden md:block bg-white rounded-2xl border-2 border-dashed border-gray-300 shadow-2xl overflow-hidden mt-8 lg:mt-0">
+                                        <!-- Dashboard Layout -->
+                                        <div class="flex h-full">
+                                            <!-- Sidebar -->
+                                            <aside class="w-64 bg-gray-50 border-r border-gray-200 flex flex-col">
+                                    <!-- Sidebar Header -->
+                                    <div class="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="ui/img/logo.png" alt="ChefOS" class="w-12 h-12">
+                                            <div>
+                                                <h1 class="text-xl font-bold text-[var(--brand-green)]">ChefOS</h1>
+                                                <p class="text-sm text-gray-500">Professional Edition</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Collapse Button -->
+                                    <button class="p-3 border-b border-gray-200 hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+                                        </svg>
+                                        <span class="text-sm">Collapse</span>
+                                    </button>
+
+                                    <!-- Navigation -->
+                                    <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                                        <!-- Recipes Group -->
+                                        <div class="nav-group">
+                                            <div class="nav-parent p-3 rounded-lg flex items-center space-x-4 bg-white shadow-sm border border-gray-200">
+                                                <svg class="w-6 h-6 text-[var(--brand-green)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                </svg>
+                                                <span class="flex-1 font-medium text-gray-900">My Recipes</span>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                                </svg>
+                                            </div>
+                                            <div class="ml-6 space-y-1">
+                                                <div class="nav-item p-2 rounded-lg flex items-center space-x-3 text-[var(--brand-green)] bg-green-50">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                    </svg>
+                                                    <span class="text-sm font-medium">My Recipes</span>
+                                                </div>
+                                                <div class="nav-item p-2 rounded-lg flex items-center space-x-3 text-gray-600 hover:bg-gray-100">
+                                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                                    </svg>
+                                                    <span class="text-sm">Recipe Scaler</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Menus Group -->
+                                        <div class="nav-group">
+                                            <div class="nav-parent p-3 rounded-lg flex items-center space-x-4 text-gray-600 hover:bg-gray-100">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                                </svg>
+                                                <span class="flex-1">My Menus</span>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <!-- Shopping Group -->
+                                        <div class="nav-group">
+                                            <div class="nav-parent p-3 rounded-lg flex items-center space-x-4 text-gray-600 hover:bg-gray-100">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                                </svg>
+                                                <span class="flex-1">My Shopping</span>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+
+                                        <!-- Calendar -->
+                                        <div class="nav-item p-3 rounded-lg flex items-center space-x-4 text-gray-600 hover:bg-gray-100">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                            <span class="flex-1">My Calendar</span>
+                                        </div>
+
+                                        <!-- PDF Management -->
+                                        <div class="nav-item p-3 rounded-lg flex items-center space-x-4 text-gray-600 hover:bg-gray-100">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                            </svg>
+                                            <span class="flex-1">PDF Management</span>
+                                        </div>
+
+                                        <!-- Kitchen Calculator -->
+                                        <div class="nav-item p-3 rounded-lg flex items-center space-x-4 text-gray-600 hover:bg-gray-100">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                            </svg>
+                                            <span class="flex-1">Kitchen Calculator</span>
+                                        </div>
+                                    </nav>
+                                </aside>
+
+                                <!-- Main Content Area -->
+                                <main class="flex-1 flex flex-col">
+                                    <!-- Main Content -->
+                                    <div class="flex-1 p-6 overflow-y-auto">
+                                        <!-- Page Header -->
+                                        <div class="mb-6">
+                                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                <div class="flex flex-col sm:flex-row justify-between gap-4">
+                                                    <div class="min-w-0">
+                                                        <h2 class="text-xl font-bold text-gray-900 whitespace-nowrap">My Recipes</h2>
+                                                        <p class="text-sm text-gray-500 whitespace-nowrap">Your Saved Collection</p>
+                                                    </div>
+                                                    <div class="flex gap-2 flex-nowrap w-full sm:w-auto">
+                                                        <button class="px-2.5 py-1 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors h-8 flex items-center">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                                            </svg>
+                                                        </button>
+                                                        <button class="px-2.5 py-1 bg-[var(--brand-green)] text-white rounded-lg text-sm font-medium hover:bg-green-600 transition-colors h-8 flex items-center">
+                                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                                     <!-- Recipe Cards Grid -->
+                                                     <div class="grid grid-cols-2 gap-4">
+                                            <!-- Recipe Card 1 -->
+                                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-[var(--brand-green)] transition-all cursor-pointer">
+                                                <div class="h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                                                    <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="p-3">
+                                                    <h3 class="font-bold text-gray-900 mb-1 text-sm">Classic Marinara</h3>
+                                                    <p class="text-xs text-gray-500 mb-2">Yield: 4 portions</p>
+                                                    <div class="flex gap-1">
+                                                        <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">Italian</span>
+                                                        <span class="text-xs bg-gray-100 text-gray-700 px-1.5 py-0.5 rounded-full">Sauce</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Recipe Card 2 -->
+                                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-[var(--brand-green)] transition-all cursor-pointer">
+                                                <div class="h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                                                    <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="p-3">
+                                                    <h3 class="font-bold text-gray-900 mb-1 text-sm">Sourdough Bread</h3>
+                                                    <p class="text-xs text-gray-500 mb-2">Yield: 2 loaves</p>
+                                                    <div class="flex gap-1">
+                                                        <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">Bakery</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Recipe Card 3 -->
+                                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-[var(--brand-green)] transition-all cursor-pointer">
+                                                <div class="h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                                                    <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="p-3">
+                                                    <h3 class="font-bold text-gray-900 mb-1 text-sm">Roasted Vegetables</h3>
+                                                    <p class="text-xs text-gray-500 mb-2">Yield: 6 portions</p>
+                                                    <div class="flex gap-1">
+                                                        <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">Sides</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Recipe Card 4 -->
+                                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-[var(--brand-green)] transition-all cursor-pointer">
+                                                <div class="h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
+                                                    <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                                    </svg>
+                                                </div>
+                                                <div class="p-3">
+                                                    <h3 class="font-bold text-gray-900 mb-1 text-sm">Chocolate Cake</h3>
+                                                    <p class="text-xs text-gray-500 mb-2">Yield: 8 servings</p>
+                                                    <div class="flex gap-1">
+                                                        <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">Dessert</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+
+                                    <!-- Mobile View -->
+                                    <div class="md:hidden bg-white rounded-2xl border-2 border-dashed border-gray-300 shadow-2xl overflow-hidden w-80 mx-auto">
+                                        <!-- Mobile Header -->
+                                        <div class="bg-gradient-to-r from-[var(--brand-green)] to-green-600 px-4 py-3 flex items-center justify-between">
+                                            <div class="flex items-center gap-2">
+                                                <img src="ui/img/logo.png" alt="ChefOS Logo" class="h-6 w-auto">
+                                                <span class="text-white font-bold">ChefOS</span>
+                                            </div>
+                                            <button class="text-white">
+                                                <i class="fas fa-bars text-lg"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Mobile Content -->
+                                        <div class="p-4">
+                                            <!-- Search -->
+                                            <div class="relative mb-4">
+                                                <input type="text" placeholder="Search recipes..." class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 bg-gray-50 text-sm">
+                                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                                            </div>
+
+                                            <!-- Mobile Recipe Cards -->
+                                            <div class="space-y-3">
+                                                <!-- Recipe 1 -->
+                                                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-all">
+                                                    <div class="flex gap-3">
+                                                        <div class="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center flex-shrink-0">
+                                                            <i class="fas fa-utensils text-green-700 text-xl"></i>
+                                                        </div>
+                                                        <div class="flex-1 p-3">
+                                                            <h3 class="font-bold text-gray-900 text-sm mb-1">Classic Marinara</h3>
+                                                            <p class="text-xs text-gray-500 mb-2">Yield: 4 portions</p>
+                                                            <div class="flex gap-1.5">
+                                                                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Italian</span>
+                                                                <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">Sauce</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Recipe 2 -->
+                                                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-all">
+                                                    <div class="flex gap-3">
+                                                        <div class="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center flex-shrink-0">
+                                                            <i class="fas fa-bread-slice text-green-700 text-xl"></i>
+                                                        </div>
+                                                        <div class="flex-1 p-3">
+                                                            <h3 class="font-bold text-gray-900 text-sm mb-1">Sourdough Bread</h3>
+                                                            <p class="text-xs text-gray-500 mb-2">Yield: 2 loaves</p>
+                                                            <div class="flex gap-1.5">
+                                                                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Bakery</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Recipe 3 -->
+                                                <div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-all">
+                                                    <div class="flex gap-3">
+                                                        <div class="w-24 h-24 bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center flex-shrink-0">
+                                                            <i class="fas fa-carrot text-green-700 text-xl"></i>
+                                                        </div>
+                                                        <div class="flex-1 p-3">
+                                                            <h3 class="font-bold text-gray-900 text-sm mb-1">Roasted Vegetables</h3>
+                                                            <p class="text-xs text-gray-500 mb-2">Yield: 6 portions</p>
+                                                            <div class="flex gap-1.5">
+                                                                <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Sides</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Bottom Nav (Mobile) -->
+                                            <div class="mt-4 pt-4 border-t border-gray-200 flex justify-around">
+                                                <button class="flex flex-col items-center gap-1 text-[var(--brand-green)]">
+                                                    <i class="fas fa-book"></i>
+                                                    <span class="text-xs font-medium">Recipes</span>
+                                                </button>
+                                                <button class="flex flex-col items-center gap-1 text-gray-400">
+                                                    <i class="fas fa-clipboard-list"></i>
+                                                    <span class="text-xs">Menus</span>
+                                                </button>
+                                                <button class="flex flex-col items-center gap-1 text-gray-400">
+                                                    <i class="fas fa-shopping-cart"></i>
+                                                    <span class="text-xs">Shopping</span>
+                                                </button>
+                                                <button class="flex flex-col items-center gap-1 text-gray-400">
+                                                    <i class="fas fa-calculator"></i>
+                                                    <span class="text-xs">Calc</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- DATA PRIVACY Section -->
+                    <div class="mt-16 text-center">
+                    <div class="flex justify-center mb-4">
+                            <div class="inline-flex items-center gap-3 bg-white/80 px-4 py-2 rounded-full border border-gray-200 shadow-sm backdrop-blur-sm">
+                            <i class="fas fa-shield-alt text-[var(--brand-green)]"></i>
+                            <span class="font-medium text-sm text-gray-700">DATA PRIVACY</span>
+                        </div>
+                    </div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                            <span class="relative inline-block">
+                                Secure & Flexible
+                                <span class="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-[var(--brand-green)] to-green-500 rounded-full transform -skew-x-12"></span>
+                            </span>
+                            Storage Options
+                        </h2>
+                        <p class="text-base md:text-lg text-gray-600 mb-8">Store locally or sync with ChefOS Cloud. Your data, your choice.</p>
+                        <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 md:gap-x-12">
+                            <div class="integration-logo flex flex-col items-center gap-3 text-xl md:text-2xl font-semibold text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-300">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                    <svg class="w-6 h-6 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+                                    </svg>
+                                </div>
+                                <span class="text-center">Local Storage</span>
+                            </div>
+                            <div class="integration-logo flex flex-col items-center gap-3 text-xl md:text-2xl font-semibold text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-300">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                    <svg class="w-6 h-6 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                                    </svg>
+                                </div>
+                                <span class="text-center">Cloud Sync Available</span>
+                            </div>
+                            <div class="integration-logo flex flex-col items-center gap-3 text-xl md:text-2xl font-semibold text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-300">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                    <svg class="w-6 h-6 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                                    </svg>
+                                </div>
+                                <span class="text-center">Secure & Private</span>
+                            </div>
+                            <!-- 4th icon for mobile only -->
+                            <div class="integration-logo flex flex-col items-center gap-3 text-xl md:text-2xl font-semibold text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-300 md:hidden">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
+                                    <svg class="w-6 h-6 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75-11.25h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75a2.25 2.25 0 0 1-2.25-2.25V6.75a2.25 2.25 0 0 1 2.25-2.25Z" />
+                                    </svg>
+                                </div>
+                                <span class="text-center">Data Encryption</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-24 relative fade-in-section bg-white border-y border-gray-200 min-h-[600px]">
+            
+            <div class="pattern-container"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <div class="flex justify-center mb-4">
+                        <svg class="w-10 h-10 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900">The Professional Kitchen Toolkit</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Everything you need to run an efficient, profitable kitchen with absolute consistency.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-1">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Recipe Scaler</h3>
+                        <p class="flex-grow text-center">Scale any recipe from 1 portion to 1000. Our professional scaling engine handles weights, volumes, and units flawlessly, saving you time and preventing errors.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-2">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Menu Management</h3>
+                        <p class="flex-grow text-center">Build, manage, and cost your menus. Combine saved recipes into complete service menus and store your PDF files, all in one organized hub.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-3">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Shopping Lists</h3>
+                        <p class="flex-grow text-center">Generate shopping lists from your menus or recipes. Manage suppliers, track prices, and calculate subtotals to keep your food costs in check.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-4">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">Kitchen Calculator</h3>
+                        <p class="flex-grow text-center">A powerful calculator built for chefs. Convert units (grams to oz, cups to tbsp), calculate ingredient densities, and perform quick kitchen math without leaving the app.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-5">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">My Recipes</h3>
+                        <p class="flex-grow text-center">Store and organize all your recipes in one centralized location. Access your complete recipe library anytime, anywhere with full search and filtering capabilities.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-6">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">My Menus</h3>
+                        <p class="flex-grow text-center">Create and manage service menus by combining your saved recipes. Plan events, daily specials, and seasonal offerings with complete cost tracking.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm fade-in-up animated stagger-7">
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">PDF Management</h3>
+                        <p class="flex-grow text-center">Attach and organize PDF menus, recipes, and documents. Keep all your important files linked to menus and recipes for easy reference and sharing.</p>
+                    </div>
+
+                    <div class="main-card toolkit-card card-shine border border-dashed border-gray-300 p-6 rounded-2xl flex flex-col shadow-sm relative fade-in-up animated stagger-8">
+                        <div class="absolute top-3 right-3">
+                            <span class="bg-[var(--brand-green)] text-white text-xs font-bold px-2 py-1 rounded-full">NEW</span>
+                        </div>
+                        <div class="flex justify-center mb-6">
+                            <div class="icon-container w-16 h-16 rounded-xl bg-green-100 text-green-700 flex items-center justify-center">
+                                <svg class="w-9 h-9" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center mb-3">My Calendar</h3>
+                        <p class="flex-grow text-center">Plan your kitchen operations with an integrated calendar. Schedule menu rotations, prep days, and special events to stay organized and efficient.</p>
+                    </div>
+                </div>
+                
+                <!-- Additional Information Section -->
+                <div class="mt-16 text-center">
+                    <div class="max-w-4xl mx-auto bg-gradient-to-r from-green-50 to-white rounded-2xl border border-green-100 p-8 md:p-12">
+                        <div class="flex justify-center mb-6">
+                            <div class="inline-flex items-center gap-3 bg-green-100 px-4 py-2 rounded-full border border-green-200 shadow-sm">
+                                <i class="fas fa-rocket text-[var(--brand-green)]"></i>
+                                <span class="font-medium text-sm text-gray-700">GET STARTED TODAY</span>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Kitchen?</h3>
+                        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Join thousands of professional chefs who are already saving time, reducing costs, and improving consistency with ChefOS.</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <i class="fas fa-clock text-[var(--brand-green)]"></i>
+                                <span class="text-sm font-medium">7-day free trial</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <i class="fas fa-credit-card text-[var(--brand-green)]"></i>
+                                <span class="text-sm font-medium">No credit card required</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700">
+                                <i class="fas fa-mobile-alt text-[var(--brand-green)]"></i>
+                                <span class="text-sm font-medium">Works on all devices</span>
+                            </div>
+                        </div>
+                        
+                        <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-green-200">
+                            Start Your Free Trial Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section id="testimonials" class="py-24 relative overflow-hidden fade-in-section bg-white/50 border-y border-[var(--border-light)]">
+            
+            <div class="pattern-container"></div>
+
+            <div class="container mx-auto px-6 relative z-10 text-center mb-16">
+                <div class="flex justify-center mb-4">
+                    <div class="bg-gray-100 px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                        <span class="font-medium text-sm text-gray-700">TESTIMONIALS</span>
+                    </div>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Trusted by Chefs & Kitchen Managers</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">See how professionals are using ChefOS to save time and control costs.</p>
+            </div>
+            
+            <div class="flex flex-col gap-6">
+                <div class="scroller" data-animated="true" data-direction="left" style="--_animation-duration: 30s;">
+                    <div class="scroller__inner">
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"ChefOS has been a game-changer for my prep. The scaling is perfect every time, and my food cost has dropped 5%."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">MB</div><div><p class="font-bold text-gray-900">Chef Marco Bianchi</p><p class="text-sm text-gray-500">Restaurant Owner</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"I build all my event menus in ChefOS. Generating the shopping list from 10 different recipes now takes 30 seconds, not 2 hours."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">ER</div><div><p class="font-bold text-gray-900">Emily Rodriguez</p><p class="text-sm text-gray-500">Catering Manager</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"The kitchen calculator is my most-used tool. Converting my recipes from grams to pounds is instant and error-free."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">DK</div><div><p class="font-bold text-gray-900">David Kim</p><p class="text-sm text-gray-500">Bakery Owner</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"The automation has saved us thousands of hours and kept every touchpoint on-brand."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">JT</div><div><p class="font-bold text-gray-900">James Turner</p><p class="text-sm text-gray-500">Operations, Skylark Studio</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"ChefOS has revolutionized our kitchen operations. The recipe scaling is flawless and saves us hours every day."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">AL</div><div><p class="font-bold text-gray-900">Anna Lopez</p><p class="text-sm text-gray-500">Executive Chef</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"The menu costing feature is incredible. I can instantly see profit margins and adjust pricing accordingly."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">RW</div><div><p class="font-bold text-gray-900">Robert Wilson</p><p class="text-sm text-gray-500">Restaurant Manager</p></div></div></div>
+                    </div>
+                </div>
+                 <div class="scroller" data-animated="true" data-direction="right" style="--_animation-duration: 35s;">
+                    <div class="scroller__inner">
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"Finally, a tool that understands kitchen math. The density converter for '1 cup of flour' is worth the price alone."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">MC</div><div><p class="font-bold text-gray-900">Michael Chen</p><p class="text-sm text-gray-500">Pastry Chef</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"The single source of truth for our recipes is invaluable. No more hunting for the right spec sheet."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">SL</div><div><p class="font-bold text-gray-900">Sarah Lee</p><p class="text-sm text-gray-500">Head Chef, Orbit Inc.</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"Onboarding new line cooks is so much faster now that our recipes are standardized and scalable in ChefOS."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">OG</div><div><p class="font-bold text-gray-900">Olivia Garcia</p><p class="text-sm text-gray-500">Kitchen Manager, Fusion Co.</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"I use the shopping list feature to cost my weekly specials. It's simple, fast, and keeps me on budget."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">BC</div><div><p class="font-bold text-gray-900">Ben Carter</p><p class="text-sm text-gray-500">Chef de Cuisine</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"The PDF management system keeps all our documents organized. No more lost recipe cards or menu sheets."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">KM</div><div><p class="font-bold text-gray-900">Kelly Martinez</p><p class="text-sm text-gray-500">Kitchen Supervisor</p></div></div></div>
+                        <div class="testimonial-card border border-gray-200 p-8 rounded-2xl w-80 flex-shrink-0 bg-white text-left shadow-sm"><p class="text-lg mb-6">"ChefOS has streamlined our entire operation. From recipe development to cost analysis, everything is seamless."</p><div class="flex items-center border-t border-gray-200 pt-4"><div class="testimonial-logo w-10 h-10 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-lg font-bold mr-3">TD</div><div><p class="font-bold text-gray-900">Thomas Davis</p><p class="text-sm text-gray-500">Food Service Director</p></div></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rate Us / Leave Message Section -->
+            <div class="mt-16 text-center px-4 md:px-0">
+                <div class="max-w-lg md:max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 p-4 md:p-12">
+                    <div class="flex justify-center mb-4 md:mb-6">
+                        <div class="bg-gray-100 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-gray-200 shadow-sm">
+                            <span class="font-medium text-xs md:text-sm text-gray-700">RATE & REVIEW</span>
+                        </div>
+                    </div>
+                    <h3 class="text-lg md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Love ChefOS? Share Your Experience!</h3>
+                    <p class="text-sm md:text-lg text-gray-600 mb-6 md:mb-8">Help other chefs discover ChefOS by leaving a review or sending us your feedback.</p>
+                    
+                    <div class="flex flex-col gap-3 md:gap-4 justify-center items-center">
+                        <a href="#" class="glow-btn special-button btn-hover pulse-on-hover px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-lg shadow-lg shadow-green-200 flex items-center gap-2 w-full justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                            </svg>
+                            Rate Us
+                        </a>
+                        <a href="#" class="glow-btn main-button btn-hover border px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-lg shadow-lg shadow-gray-100 flex items-center gap-2 w-full justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Leave Message
+                        </a>
+                    </div>
+                    
+                    <p class="text-xs md:text-sm text-gray-500 mt-4 md:mt-6">
+                        Your feedback helps us improve ChefOS for chefs everywhere
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-transformation" class="py-24 relative fade-in-section overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-green-50"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                        <!-- Sad Chef (Before) -->
+                        <div class="flex flex-col items-center text-center space-y-6 p-8 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-200">
+                            <img src="https://generated.pictographic.io/transparency/dQKR3s28yavgDLMicH9ooA.png" alt="Stressed chef without ChefOS" class="w-64 h-64 object-contain">
+                            <div class="space-y-3">
+                                <h3 class="text-2xl font-bold text-gray-900">Without ChefOS</h3>
+                                <ul class="space-y-2 text-left text-gray-600">
+                                    <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl">✓</span>
+                                        <span>Manual recipe calculations and errors</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl">✓</span>
+                                        <span>Disorganized menus and recipes</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl">✓</span>
+                                        <span>Time-consuming shopping list creation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl">✓</span>
+                                        <span>Inconsistent food costs</span>
+                                    </li>
+                                </ul>
+                </div>
+                        </div>
+
+                        <!-- Happy Chef (After) -->
+                        <div class="flex flex-col items-center text-center space-y-6 p-8 rounded-2xl bg-gradient-to-br from-green-50 to-white border-2 border-[var(--brand-green)] shadow-xl shadow-green-100 relative">
+                            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[var(--brand-green)] text-white px-6 py-2 rounded-full font-bold text-sm">
+                                TRANSFORM YOUR KITCHEN
+                            </div>
+                            <img src="https://generated.pictographic.io/transparency/8JovaPU9J78SYrbcCVcU3x.png" alt="Happy chef using ChefOS" class="w-64 h-64 object-contain">
+                            <div class="space-y-3">
+                                <h3 class="text-2xl font-bold text-gray-900">With ChefOS</h3>
+                                <ul class="space-y-2 text-left text-gray-700">
+                                <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl font-bold">✓</span>
+                                        <span>Instant, accurate recipe scaling</span>
+                                </li>
+                                <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl font-bold">✓</span>
+                                        <span>All recipes organized in one place</span>
+                                </li>
+                                <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl font-bold">✓</span>
+                                        <span>Auto-generated shopping lists</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-[var(--brand-green)] mr-3 mt-1 text-xl font-bold">✓</span>
+                                        <span>Precise cost tracking & control</span>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Message & Button -->
+                    <div class="mt-16 text-center space-y-6">
+                        <div class="flex justify-center mb-4">
+                            <div class="inline-flex items-center gap-3 bg-gray-100 px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                                <i class="fas fa-rocket text-[var(--brand-green)]"></i>
+                                <span class="font-medium text-sm text-gray-700">GET STARTED</span>
+                            </div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">
+                            Ready to Transform Your Kitchen?
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                            Join thousands of chefs who've already simplified their workflow and reduced costs with ChefOS.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                            <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover w-full sm:w-auto px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-green-200">
+                                Start Your Free Trial
+                            </a>
+                            <a href="#features" class="glow-btn main-button btn-hover w-full sm:w-auto border px-10 py-4 rounded-full font-semibold text-lg shadow-lg shadow-gray-100">
+                                See All Features
+                            </a>
+                        </div>
+                        <p class="text-sm text-gray-500 pt-2">
+                            No credit card required • 7-day free trial • Cancel anytime
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-20 relative fade-in-section bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+            <!-- Decorative background -->
+            <div class="absolute inset-0 overflow-hidden opacity-40">
+                <div class="absolute -top-1/2 -right-1/4 w-96 h-96 bg-green-100 rounded-full filter blur-3xl"></div>
+                <div class="absolute -bottom-1/2 -left-1/4 w-96 h-96 bg-green-100 rounded-full filter blur-3xl"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-gray-100 px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                            <span class="font-medium text-sm text-gray-700">PRICING</span>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-3">One Simple Plan</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Try free for 7 days. Then $5/month. Cancel anytime.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <!-- Single Card -->
+                    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 relative">
+                        <!-- Top accent bar -->
+                        <div class="h-2 bg-gradient-to-r from-[var(--brand-green)] to-green-600"></div>
+                        
+                        <div class="p-8 md:p-12">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                                <!-- Left: Plan details -->
+                                <div class="flex-1">
+                                    <div class="inline-block bg-green-100 text-[var(--brand-green)] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-4">
+                                        7-Day Free Trial
+                            </div>
+                                    <h3 class="text-3xl font-bold mb-2">ChefOS Pro</h3>
+                                    <p class="text-gray-600 mb-6">Everything you need to run your kitchen efficiently.</p>
+                                    
+                                    <div class="flex items-baseline gap-2 mb-6">
+                                        <span class="text-5xl font-bold text-[var(--brand-green)]">$5</span>
+                                        <span class="text-xl text-gray-500">/month</span>
+                                </div>
+
+                                    <a href="./pages/dashboard/index.html" class="signup-cta-btn w-full md:w-auto glow-btn btn-hover pulse-on-hover bg-[var(--brand-green)] hover:bg-[var(--brand-green-hover)] text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg">
+                                Start Free Trial
+                            </a>
+                                    <p class="text-sm text-gray-500 mt-3">No credit card required</p>
+                                </div>
+
+                                <!-- Right: Features -->
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-900 mb-4">Everything included:</h4>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-start text-gray-700">
+                                            <svg class="w-5 h-5 text-[var(--brand-green)] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Professional Recipe Scaler</span>
+                                        </li>
+                                        <li class="flex items-start text-gray-700">
+                                            <svg class="w-5 h-5 text-[var(--brand-green)] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Menu Management & PDF Storage</span>
+                                        </li>
+                                        <li class="flex items-start text-gray-700">
+                                            <svg class="w-5 h-5 text-[var(--brand-green)] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Shopping List Generator</span>
+                                        </li>
+                                        <li class="flex items-start text-gray-700">
+                                            <svg class="w-5 h-5 text-[var(--brand-green)] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Kitchen Calculator & Unit Converter</span>
+                                        </li>
+                                        <li class="flex items-start text-gray-700">
+                                            <svg class="w-5 h-5 text-[var(--brand-green)] mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>Optional Cloud Sync</span>
+                                        </li>
+                                    </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust badges -->
+                    <div class="mt-12 text-center">
+                        <p class="text-sm text-gray-500 mb-4">Trusted by professional chefs worldwide</p>
+                        <div class="flex justify-center items-center gap-8 flex-wrap">
+                            <div class="flex items-center gap-2 text-gray-600">
+                                <svg class="w-5 h-5 text-[var(--brand-green)]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">Secure Payments</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600">
+                                <svg class="w-5 h-5 text-[var(--brand-green)]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">Cancel Anytime</span>
+                                </div>
+                            <div class="flex items-center gap-2 text-gray-600">
+                                <svg class="w-5 h-5 text-[var(--brand-green)]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"></path>
+                                    <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                                </svg>
+                                <span class="text-sm">Priority Support</span>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="py-20 relative fade-in-section">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-gray-100 px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                            <span class="font-medium text-sm text-gray-700">FAQ</span>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter">Questions? We've Got Answers</h2>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-3">
+                        
+                        <div class="faq-item bg-white border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors">
+                            <button class="w-full flex justify-between items-center text-left p-6">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Is this a subscription?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">Yes. ChefOS Pro is a monthly subscription for $5/month. You get a 7-day free trial to try all features—no credit card required. After the trial, you can subscribe or cancel anytime.</p>
+                            </div>
+                                </div>
+                        </div>
+
+                        <div class="faq-item bg-white border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors">
+                            <button class="w-full flex justify-between items-center text-left p-6">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Where is my data stored?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">By default, your data is stored 100% on your local device using your browser's internal storage. We have no access to your recipes, menus, or costs—it is completely private. However, if you choose to enable ChefOS Cloud in your settings, your data will sync to our secure servers for backup and multi-device access.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-white border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors">
+                            <button class="w-full flex justify-between items-center text-left p-6">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">What happens if I get a new computer?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">You can easily export a full backup of your data from the Settings page in the app. This creates a single file you can save, email to yourself, or move to a new device. You can then import this file on your new computer to restore all your data.</p>
+                            </div>
+                                </div>
+                        </div>
+
+                        <div class="faq-item bg-white border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors">
+                            <button class="w-full flex justify-between items-center text-left p-6">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Is ChefOS suitable for home cooks?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">Absolutely! While built for professionals, ChefOS is perfect for any passionate home cook looking for precision when scaling recipes or converting units. Try the 7-day free trial to see if it's right for you.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Need more help button -->
+                    <div class="text-center mt-8">
+                        <a href="./pages/help/index.html" class="glow-btn main-button btn-hover border px-6 py-3 rounded-full font-semibold text-lg shadow-lg shadow-gray-100 flex items-center gap-2 mx-auto w-fit">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Need more help?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-[var(--border-light)] text-[var(--text-p-light)]">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start md:col-span-2 lg:col-span-2">
+                     <a href="#" class="text-2xl font-bold logo-text flex items-center gap-2 mb-4">
+                         <img src="ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                         <span>ChefOS</span>
+                     </a>
+                    <p class="text-sm mb-4">Your Kitchen, Organized. Instantly.</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <img src="ui/img/gdpr.png" alt="GDPR Compliant" class="h-8 w-auto">
+                        <img src="ui/img/pipeda.svg" alt="PIPEDA Compliant" class="h-8 w-auto">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./pages/about/index.html" class="hover:text-gray-900">About Us</a></li>
+                        <li><a href="./pages/legal/index.html" class="hover:text-gray-900">Privacy Policy</a></li>
+                        <li><a href="./pages/legal/index.html" class="hover:text-gray-900">Terms of Service</a></li>
+                                                <li><a href="./pages/pricing/index.html" class="hover:text-gray-900">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="hover:text-gray-900">Features</a></li>
+                        <li><a href="./pages/recipe-sclaer/index.html" class="hover:text-gray-900">Recipe Scaler</a></li>
+                        <li><a href="./pages/menus/index.html" class="hover:text-gray-900">Menu Management</a></li>
+                        <li><a href="./pages/recipes/index.html" class="hover:text-gray-900">Recipe Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Toolkit</h3>
+                    <ul classs="space-y-2">
+                        <li><a href="./pages/shopping/index.html" class="hover:text-gray-900">Shopping Lists</a></li>
+                        <li><a href="./pages/calculator/index.html" class="hover:text-gray-900">Kitchen Calculator</a></li>
+                        <li><a href="./pages/calendar/index.html" class="hover:text-gray-900">Chef Calendar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./pages/chef/index.html" class="hover:text-gray-900">For Chefs</a></li>
+                        <li><a href="./pages/baking/index.html" class="hover:text-gray-900">For Bakers</a></li>
+                        <li><a href="./pages/catering/index.html" class="hover:text-gray-900">For Caterers</a></li>
+                        <li><a href="#contact" class="hover:text-gray-900">Support</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="https://x.com/withchefos" aria-label="Twitter" class="hover:text-gray-900"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+                    <a href="https://www.instagram.com/withchefos/?hl=en" aria-label="Instagram" class="hover:text-gray-900"><i class="fa-brands fa-instagram text-xl"></i></a>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="https://www.blacnova.net/img/bn_black.png" alt="Blacnova" class="h-6 w-auto" id="footer-logo">
+                    <p class="text-sm">© 2025 ChefOS by Blacnova</p>
+                    <p class="text-sm">All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="ui.js"></script>
+    <script src="test.js"></script>
+    <script>
+        // --- Testimonial Scroller ---
+        const scrollers = document.querySelectorAll(".scroller");
+        if (scrollers) {
+             scrollers.forEach((scroller) => {
+                const scrollerInner = scroller.querySelector(".scroller__inner");
+                if (scrollerInner) {
+                     const scrollerContent = Array.from(scrollerInner.children);
+                    // Duplicate content for seamless loop
+                    scrollerContent.forEach((item) => {
+                        const duplicatedItem = item.cloneNode(true);
+                        duplicatedItem.setAttribute("aria-hidden", "true");
+                        scrollerInner.appendChild(duplicatedItem);
+                    });
+                    // Duplicate again for extra smoothness
+                    scrollerContent.forEach((item) => {
+                        const duplicatedItem = item.cloneNode(true);
+                        duplicatedItem.setAttribute("aria-hidden", "true");
+                        scrollerInner.appendChild(duplicatedItem);
+                    });
+                }
+                 // Set animation direction for the second scroller
+                if(scroller.dataset.direction === 'right'){
+                    scroller.style.setProperty('--_animation-direction', 'reverse');
+                }
+            });
+        }
+
+        // --- Particles (FAQ & Pricing) ---
+        const createParticles = (container, count, className) => {
+             if (container) {
+                 for (let i = 0; i < count; i++) {
+                     const p = document.createElement('div');
+                     p.className = className;
+                     const size = Math.random() * 2 + 1;
+                     p.style.width = `${size}px`;
+                     p.style.height = `${size}px`;
+                     p.style.left = `${Math.random() * 100}%`;
+                     p.style.bottom = `-${size}px`;
+                     p.style.animationDuration = `${Math.random() * 20 + 20}s`;
+                     p.style.animationDelay = `${Math.random() * 20}s`;
+                     p.style.animationName = 'float-from-bottom';
+                     container.appendChild(p);
+                 }
+             }
+        };
+
+        // Create particles for each FAQ item
+        document.querySelectorAll('.faq-item .particle-container').forEach(container => {
+            createParticles(container, 15, 'particle');
+        });
+        
+        // Create particles for each pricing card
+        document.querySelectorAll('.pricing-card .particle-container').forEach(container => {
+            createParticles(container, 20, 'particle');
+        });
+
+        // Add keyframes for particle animation
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `@keyframes float-from-bottom { to { transform: translateY(-110vh) translateX(-10vw); opacity: 0; } }`;
+        document.head.appendChild(styleSheet);
+
+        // --- Dynamic Header Script ---
+        const header = document.querySelector('header');
+        if(header){
+            const handleScroll = () => header.classList.toggle('header-scrolled', window.scrollY > 10);
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        }
+
+        // --- Background SVG Icon Pattern Script ---
+        // Targeting only the pattern container inside the #features section
+        const featureSection = document.getElementById('features');
+        if (featureSection) {
+            const patternContainer = featureSection.querySelector('.pattern-container');
+            if (patternContainer) {
+                    const icons = [
+                        'ui/img/icon-1.svg', 'ui/img/icon-2.svg', 'ui/img/icon-3.svg',
+                        'ui/img/icon-4.svg', 'ui/img/icon-5.svg', 'ui/img/icon-6.svg',
+                        'ui/img/icon-7.svg', 'ui/img/icon-8.svg', 'ui/img/icon-9.svg'
+                    ];
+                    
+                    const iconCount = 50; 
+                    const placedIcons = []; 
+                    const maxAttempts = 30; 
+                    const minIconSize = 3.5; 
+                    const maxIconSize = 5.5; 
+
+                    for (let i = 0; i < iconCount; i++) {
+                        let newIconData;
+                        let positionIsValid = false;
+
+                        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                            newIconData = {
+                                top: Math.random() * 100,
+                                left: Math.random() * 100,
+                                size: Math.random() * (maxIconSize - minIconSize) + minIconSize,
+                                iconPath: icons[Math.floor(Math.random() * icons.length)],
+                            };
+
+                            let hasOverlap = false;
+                            for (const placed of placedIcons) {
+                                const dx = newIconData.left - placed.left;
+                                const dy = newIconData.top - placed.top;
+                                const distance = Math.sqrt(dx * dx + dy * dy);
+                                
+                                const conversionFactor = 4.5; // Increased for more spacing
+                                const minDistance = (newIconData.size + placed.size) / 2 * conversionFactor;
+
+                                if (distance < minDistance) {
+                                    hasOverlap = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasOverlap) {
+                                positionIsValid = true;
+                                break;
+                            }
+                        }
+
+                        if (positionIsValid) {
+                            placedIcons.push(newIconData);
+
+                            const iconEl = document.createElement('img');
+                            iconEl.src = newIconData.iconPath;
+                            iconEl.alt = ""; 
+                            iconEl.setAttribute('aria-hidden', 'true');
+
+                            const rotation = (Math.random() * 50) - 25; // Tilt between -25deg and +25deg
+                            const scale = 0.7 + Math.random() * 0.6; 
+                            
+                            iconEl.style.top = `${newIconData.top}%`;
+                            iconEl.style.left = `${newIconData.left}%`;
+                            iconEl.style.width = `${newIconData.size}rem`;
+                            iconEl.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
+                            iconEl.style.opacity = (0.08 + Math.random() * 0.12).toFixed(2); // Range: 0.08 to 0.20
+                            
+                            patternContainer.appendChild(iconEl);
+                        }
+                    }
+                }
+            }
+
+            // --- Background SVG Icon Pattern for Testimonials Section ---
+            const testimonialsSection = document.getElementById('testimonials');
+            if (testimonialsSection) {
+                const patternContainer = testimonialsSection.querySelector('.pattern-container');
+                if (patternContainer) {
+                    const icons = [
+                        'ui/img/icon-1.svg', 'ui/img/icon-2.svg', 'ui/img/icon-3.svg',
+                        'ui/img/icon-4.svg', 'ui/img/icon-5.svg', 'ui/img/icon-6.svg',
+                        'ui/img/icon-7.svg', 'ui/img/icon-8.svg', 'ui/img/icon-9.svg'
+                    ];
+                    
+                    const iconCount = 50; 
+                    const placedIcons = []; 
+                    const maxAttempts = 30; 
+                    const minIconSize = 3.5; 
+                    const maxIconSize = 5.5; 
+
+                    for (let i = 0; i < iconCount; i++) {
+                        let newIconData;
+                        let positionIsValid = false;
+
+                        for (let attempt = 0; attempt < maxAttempts; attempt++) {
+                            newIconData = {
+                                top: Math.random() * 100,
+                                left: Math.random() * 100,
+                                size: Math.random() * (maxIconSize - minIconSize) + minIconSize,
+                                iconPath: icons[Math.floor(Math.random() * icons.length)],
+                            };
+
+                            let hasOverlap = false;
+                            for (const placed of placedIcons) {
+                                const dx = newIconData.left - placed.left;
+                                const dy = newIconData.top - placed.top;
+                                const distance = Math.sqrt(dx * dx + dy * dy);
+                                
+                                const conversionFactor = 4.5;
+                                const minDistance = (newIconData.size + placed.size) / 2 * conversionFactor;
+
+                                if (distance < minDistance) {
+                                    hasOverlap = true;
+                                    break;
+                                }
+                            }
+
+                            if (!hasOverlap) {
+                                positionIsValid = true;
+                                break;
+                            }
+                        }
+
+                        if (positionIsValid) {
+                            placedIcons.push(newIconData);
+
+                            const iconEl = document.createElement('img');
+                            iconEl.src = newIconData.iconPath;
+                            iconEl.alt = ""; 
+                            iconEl.setAttribute('aria-hidden', 'true');
+
+                            const rotation = (Math.random() * 50) - 25;
+                            const scale = 0.7 + Math.random() * 0.6; 
+                            
+                            iconEl.style.top = `${newIconData.top}%`;
+                            iconEl.style.left = `${newIconData.left}%`;
+                            iconEl.style.width = `${newIconData.size}rem`;
+                            iconEl.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(${scale})`;
+                            iconEl.style.opacity = (0.08 + Math.random() * 0.12).toFixed(2);
+                            
+                            patternContainer.appendChild(iconEl);
+                        }
+                    }
+                }
+            }
+
+            // ========== ANIMATIONS & MICROINTERACTIONS ==========
+            
+            // GSAP ScrollTrigger - Fade in cards on scroll
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate toolkit cards
+            const toolkitCards = document.querySelectorAll('.fade-in-up');
+            toolkitCards.forEach((card) => {
+                gsap.fromTo(card,
+                    { opacity: 0, y: 50 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+            
+            // Vanilla Tilt for toolkit cards (subtle 3D effect)
+            const cards = document.querySelectorAll('.toolkit-card');
+            if (cards.length > 0) {
+                VanillaTilt.init(cards, {
+                    max: 8,
+                    speed: 400,
+                    glare: true,
+                    'max-glare': 0.3,
+                    scale: 1.02
+                });
+            }
+            
+            // GSAP - Animate sections on scroll
+            const allSections = document.querySelectorAll('section');
+            allSections.forEach((section, index) => {
+                gsap.fromTo(section,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: section,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+            
+            // Hero section animations
+            gsap.from('.hero-title', {
+                opacity: 0,
+                y: 50,
+                duration: 1.2,
+                ease: 'power3.out',
+                delay: 0.3
+            });
+            
+            gsap.from('.hero-subtitle', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.6
+            });
+            
+            gsap.from('.hero-buttons', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: 'power3.out',
+                delay: 0.9
+            });
+            
+            // Dashboard mockup animation
+            gsap.from('.dashboard-mockup', {
+                opacity: 0,
+                y: 60,
+                duration: 1.2,
+                ease: 'power3.out',
+                delay: 1.2
+            });
+            
+            // Hand-drawn underline for "Instantly."
+            if (typeof rough !== 'undefined') {
+                const underlineSvg = document.getElementById('hand-drawn-underline');
+                if (underlineSvg) {
+                    const rc = rough.svg(underlineSvg);
+                    const underline = rc.path('M 10 15 Q 30 8 50 12 Q 70 16 90 10 Q 110 14 130 11 Q 150 8 170 13 Q 185 16 190 15', {
+                        stroke: '#46cf78',
+                        strokeWidth: 4,
+                        fill: 'none',
+                        roughness: 2,
+                        bowing: 3,
+                        strokeLineDash: [2, 3]
+                    });
+                    underlineSvg.appendChild(underline);
+                }
+            }
+            
+            // Button ripple effect on click
+            document.querySelectorAll('.btn-hover').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple-effect 0.6s ease-out';
+                    ripple.style.pointerEvents = 'none';
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+            
+            // Add ripple animation
+            const rippleStyle = document.createElement('style');
+            rippleStyle.textContent = `
+                @keyframes ripple-effect {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(rippleStyle);
+            
+        // Position dashboard fade overlay to align with feature tags
+        function positionDashboardFade() {
+            const featureTags = document.querySelector('.hero-buttons');
+            const dashboardFade = document.querySelector('.fade-bottom');
+            const dashboardContainer = document.querySelector('.dashboard-mockup');
+        }
+    </script>
+</body>
+</html>
