@@ -47,52 +47,81 @@
                 <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-5 py-2 rounded-full font-medium text-sm header-cta hidden md:inline-flex">
                     Dashboard
                 </a>
-                <!-- Mobile menu button -->
-                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleMobileMenu()">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <!-- Modern Mobile menu button -->
+                <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center group" onclick="toggleMobileMenu()">
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
                 </button>
             </div>
         </nav>
         
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden fixed inset-0 z-50 hidden">
+        <!-- Modern Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-[9999] hidden h-screen w-screen">
             <!-- Background overlay -->
-            <div class="absolute inset-0 bg-black bg-opacity-50" onclick="toggleMobileMenu()"></div>
+            <div class="absolute inset-0 bg-black/60 w-full h-full" onclick="toggleMobileMenu()"></div>
             
             <!-- Menu panel -->
-            <div class="absolute left-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out">
-                <div class="h-full flex flex-col">
-                    <!-- Mobile menu header -->
-                    <div class="flex justify-between items-center p-6 border-b border-gray-200">
-                        <a href="#" class="text-2xl font-bold logo-text flex items-center gap-3">
-                            <img src="ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
-                            <span>ChefOS</span>
-                        </a>
-                        <button onclick="toggleMobileMenu()" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="absolute right-0 top-0 h-screen w-80 max-w-[90vw] bg-white shadow-2xl z-[10000]">
+                <div class="h-screen flex flex-col bg-white">
+                    <!-- Modern menu header -->
+                    <div class="flex justify-between items-center px-8 py-6 bg-white border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <img src="ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                            <span class="text-xl font-bold text-gray-900">ChefOS</span>
+                        </div>
+                        <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
                     </div>
                     
-                    <!-- Mobile menu navigation -->
-                    <nav class="flex-1 px-6 py-8">
-                        <div class="space-y-6">
-                            <a href="#features" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Features</a>
-                            <a href="./pages/pricing/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Pricing</a>
-                            <a href="./pages/faq/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">FAQ</a>
-                            <a href="./pages/help/index.html" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Help</a>
-                            <a href="#contact" class="block text-lg font-medium text-gray-900 hover:text-[var(--brand-green)] transition-colors" onclick="toggleMobileMenu()">Contact</a>
+                    <!-- Modern navigation -->
+                    <nav class="flex-1 px-8 py-4 bg-white">
+                        <div class="space-y-2">
+                            <a href="#features" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Features</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="./pages/pricing/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Pricing</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="./pages/faq/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">FAQ</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="./pages/help/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Help</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="#contact" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Contact</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
                         </div>
                     </nav>
                     
-                    <!-- Mobile menu CTA -->
-                    <div class="p-6 border-t border-gray-200">
-                        <a href="./pages/dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover w-full px-6 py-3 rounded-full font-semibold text-lg shadow-lg shadow-green-200 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
-                            Dashboard
+                    <!-- Modern CTA section -->
+                    <div class="px-8 py-6 border-t border-gray-100 bg-white">
+                        <a href="./pages/dashboard/index.html" class="w-full bg-gradient-to-r from-[var(--brand-green)] to-green-600 hover:from-green-600 hover:to-[var(--brand-green)] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-white">Get Started</span>
                         </a>
+                        <p class="text-center text-sm text-gray-500 mt-3">Free 7-day trial</p>
                     </div>
                 </div>
             </div>
@@ -100,7 +129,7 @@
     </header>
 
     <main>
-        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-16">
+        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-16">
             <!-- Background gradient -->
             <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-green-50/30"></div>
             
@@ -114,10 +143,10 @@
             <div class="relative z-10 container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <!-- Hero Content -->
-                    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-16">
                         <!-- Left Side - Hero Text -->
-                        <div class="flex-1 text-center lg:text-left lg:-mt-8">
-                            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight hero-title mb-6 mt-5 md:mt-0" style="margin-top: 5px;">
+                        <div class="flex-1 text-center lg:text-left">
+                            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight hero-title mb-6">
                                 Your Kitchen,<br>Organized. <span class="relative inline-block px-2 py-1" style="background: linear-gradient(135deg, #46cf78 0%, #46cf78 100%); background-size: 100% 60%; background-position: 0 60%; background-repeat: no-repeat;">Instantly.<svg id="hand-drawn-underline" class="absolute -bottom-1 left-0 w-full h-4" viewBox="0 0 200 20"></svg></span>
                     </h1>
                             <p class="max-w-2xl mx-auto lg:mx-0 text-lg md:text-xl text-gray-600 hero-subtitle mb-8">
@@ -172,7 +201,7 @@
 
                         <!-- Right Side - Dashboard Screenshot with Fade -->
                         <div class="flex-1 relative flex justify-center lg:justify-start hidden md:flex">
-                            <div class="relative dashboard-mockup h-auto max-h-[600px] lg:-mr-24 mt-8 lg:mt-16 overflow-hidden">
+                            <div class="relative dashboard-mockup h-auto max-h-[600px] lg:-mr-24 overflow-hidden">
                                 <!-- Fade overlay for right side -->
                                 <div class="absolute inset-0 bg-gradient-to-l from-white via-transparent to-transparent z-10 pointer-events-none"></div>
                                 <!-- Bottom fade overlay -->
@@ -1485,6 +1514,21 @@
             `;
             document.head.appendChild(rippleStyle);
             
+        // Simple Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            
+            if (menu.classList.contains('hidden')) {
+                // Show menu
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Hide menu
+                menu.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
         // Position dashboard fade overlay to align with feature tags
         function positionDashboardFade() {
             const featureTags = document.querySelector('.hero-buttons');
