@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefOS - Frequently Asked Questions (FAQ)</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/a2e0a4d3f1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <link rel="stylesheet" href="../../styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/rough@4.6.6/dist/rough.umd.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for consistency with main page theme */
+        .hero-title {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* White fade at bottom of hero */
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, #ffffff 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* CTA section background pattern */
+        .cta-pattern-bg {
+            background-color: #14b959;
+            background-image: url("https://transparenttextures.com/patterns/60-lines.png");
+        }
+
+        /* Custom styles for FAQ Accordion */
+        .faq-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50">
+
+    <header class="header fixed top-0 left-0 w-full z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex-1 flex justify-start">
+                <a href="../../index.html" class="text-2xl font-bold logo-text flex items-center gap-3">
+                    <img src="../../ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
+                    <span>ChefOS</span>
+                </a>
+            </div>
+            <div class="hidden md:flex justify-center items-center space-x-8 font-medium">
+                <a href="../../index.html#features" class="hover:text-gray-900 transition-colors duration-300">Features</a>
+                <a href="../pricing/index.html" class="hover:text-gray-900 transition-colors duration-300">Pricing</a>
+                <a href="./index.html" class="text-[var(--brand-green)] font-bold transition-colors duration-300">FAQ</a>
+                <a href="../help/index.html" class="hover:text-gray-900 transition-colors duration-300">Help</a>
+                <a href="../../index.html#contact" class="hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+            <div class="flex-1 flex justify-end items-center space-x-2">
+                <a href="../dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-5 py-2 rounded-full font-medium text-sm header-cta hidden md:inline-flex">
+                    Dashboard
+                </a>
+                <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center group" onclick="toggleMobileMenu()">
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-[9999] hidden h-screen w-screen">
+            <div class="absolute inset-0 bg-black/60 w-full h-full" onclick="toggleMobileMenu()"></div>
+            
+            <div class="absolute right-0 top-0 h-screen w-80 max-w-[90vw] bg-white shadow-2xl z-[10000]">
+                <div class="h-screen flex flex-col bg-white">
+                    <div class="flex justify-between items-center px-8 py-6 bg-white border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                            <span class="text-xl font-bold text-gray-900">ChefOS</span>
+                        </div>
+                        <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    </div>
+
+                    <nav class="flex-1 px-8 py-4 bg-white">
+                        <div class="space-y-2">
+                            <a href="../../index.html#features" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Features</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../pricing/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Pricing</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="./index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-[var(--brand-green)] transition-colors">FAQ</span>
+                                <svg class="w-5 h-5 text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../help/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Help</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../../index.html#contact" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Contact</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </nav>
+
+                    <div class="px-8 py-6 border-t border-gray-100 bg-white">
+                        <a href="../dashboard/index.html" class="w-full bg-gradient-to-r from-[var(--brand-green)] to-green-600 hover:from-green-600 hover:to-[var(--brand-green)] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-white">Get Started</span>
+                        </a>
+                        <p class="text-center text-sm text-gray-500 mt-3">Free 7-day trial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32 pb-16">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-green-50/30"></div>
+            
+            <div class="absolute inset-0 overflow-hidden opacity-30">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full filter blur-3xl animate-blob"></div>
+                <div class="absolute top-40 right-20 w-96 h-96 bg-green-100 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-20 left-1/3 w-80 h-80 bg-green-200 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-7xl mx-auto text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.111-1.07 2.793-1.07 3.904 0l1.83 1.767c.55.53.865 1.25.865 2.016v.418a3.75 3.75 0 0 1-.582 1.838l-1.637 2.455c-.244.365-.6.643-1.026.828L12 18h-1.5v-1.5a.75.75 0 0 1-.75-.75V15a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 1-.75-.75V12c0-.53.315-1.004.865-1.534l1.83-1.767Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25C6.075 2.25 1 7.325 1 13.25S6.075 24.25 12 24.25s11-5.075 11-11S17.925 2.25 12 2.25ZM12 18h-1.5v-1.5a.75.75 0 0 1-.75-.75V15a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 1-.75-.75V12c0-.53.315-1.004.865-1.534l1.83-1.767c1.111-1.07 2.793-1.07 3.904 0l1.83 1.767c.55.53.865 1.25.865 2.016v.418a3.75 3.75 0 0 1-.582 1.838l-1.637 2.455c-.244.365-.6.643-1.026.828L12 18h-1.5v-1.5a.75.75 0 0 1-.75-.75V15a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 1-.75-.75V12Z" clip-rule="evenodd"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight hero-title mb-6">
+                        Got Questions? <br>We've Got Answers.
+                    </h1>
+                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 hero-subtitle mb-8">
+                        Find quick answers about pricing, data security, and how ChefOS can fit into your professional or home kitchen workflow.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 hero-buttons">
+                        <a href="#faq-section" class="glow-btn special-button btn-hover pulse-on-hover w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-200">
+                            Jump to FAQs
+                        </a>
+                        <a href="../help/index.html" class="glow-btn main-button btn-hover w-full sm:w-auto border px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-100">
+                            Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-section" class="py-20 md:py-32 relative fade-in-section bg-white">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter section-title">All Your ChefOS Questions Answered</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">From pricing and data privacy to features and device compatibility, find everything you need to know.</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-3">
+                        
+                        <div class="faq-item bg-gray-50 border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors" x-data="{ open: false }">
+                            <button class="w-full flex justify-between items-center text-left p-6" @click="open = !open">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Is this a subscription?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0 transform transition-transform duration-300" :class="{ 'rotate-45': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer" x-ref="answer" x-bind:style="open ? `max-height: ${$refs.answer.scrollHeight}px` : ''">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">Yes. **ChefOS Pro** is a monthly subscription for **$5/month**. You get a 7-day free trial to try all features—no credit card required. After the trial, you can subscribe or cancel anytime.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-gray-50 border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors" x-data="{ open: false }">
+                            <button class="w-full flex justify-between items-center text-left p-6" @click="open = !open">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Where is my data stored?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0 transform transition-transform duration-300" :class="{ 'rotate-45': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer" x-ref="answer" x-bind:style="open ? `max-height: ${$refs.answer.scrollHeight}px` : ''">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">By default, your data is stored **100% on your local device** using your browser's internal storage. We have no access to your recipes, menus, or costs—it is completely private. However, if you choose to enable **ChefOS Cloud** in your settings, your data will sync to our secure servers for backup and multi-device access.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-gray-50 border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors" x-data="{ open: false }">
+                            <button class="w-full flex justify-between items-center text-left p-6" @click="open = !open">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">What happens if I get a new computer?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0 transform transition-transform duration-300" :class="{ 'rotate-45': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer" x-ref="answer" x-bind:style="open ? `max-height: ${$refs.answer.scrollHeight}px` : ''">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">You can easily **export a full backup of your data** from the Settings page in the app. This creates a single file you can save, email to yourself, or move to a new device. You can then import this file on your new computer to restore all your data. If you use **ChefOS Cloud**, your data automatically syncs when you log in on a new device.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item bg-gray-50 border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors" x-data="{ open: false }">
+                            <button class="w-full flex justify-between items-center text-left p-6" @click="open = !open">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Is ChefOS suitable for home cooks?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0 transform transition-transform duration-300" :class="{ 'rotate-45': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer" x-ref="answer" x-bind:style="open ? `max-height: ${$refs.answer.scrollHeight}px` : ''">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">Absolutely! While built for professionals, **ChefOS is perfect for any passionate home cook** looking for precision when scaling recipes, converting units, or managing a large collection of family recipes. Try the 7-day free trial to see if it's right for your kitchen!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="faq-item bg-gray-50 border border-dashed border-gray-300 rounded-xl overflow-hidden hover:border-[var(--brand-green)] transition-colors" x-data="{ open: false }">
+                            <button class="w-full flex justify-between items-center text-left p-6" @click="open = !open">
+                                <h3 class="font-semibold text-lg pr-4 text-gray-900">Do you offer discounts for culinary students or large teams?</h3>
+                                <svg class="faq-icon w-5 h-5 text-[var(--brand-green)] flex-shrink-0 transform transition-transform duration-300" :class="{ 'rotate-45': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <div class="faq-answer" x-ref="answer" x-bind:style="open ? `max-height: ${$refs.answer.scrollHeight}px` : ''">
+                                <div class="px-6 pb-6 pt-0">
+                                    <p class="text-gray-600">Yes, we offer discounted annual plans (2 months free) for all users. For large culinary school groups or commercial teams of 5 or more, please contact us directly for special bulk licensing rates.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <a href="../help/index.html" class="glow-btn main-button btn-hover border px-6 py-3 rounded-full font-semibold text-lg shadow-lg shadow-gray-100 flex items-center gap-2 mx-auto w-fit">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Need More Help? Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-32 cta-pattern-bg">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-6" style="color: #ffffff !important;">
+                        Ready to Start Cooking Smarter?
+                    </h2>
+                    <p class="text-xl text-white mb-8">
+                        Join thousands of professional chefs who've already revolutionized their kitchen operations with ChefOS.
+                    </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="../dashboard/index.html" class="glow-btn bg-white text-[var(--brand-green)] hover:bg-gray-50 w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg">
+                            Start Your Free Trial
+                        </a>
+                        <a href="../pricing/index.html" class="glow-btn border-2 border-white text-white hover:bg-white hover:text-[var(--brand-green)] w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg">
+                            View Pricing
+                        </a>
+                    </div>
+                    <p class="text-green-100 text-sm mt-4">No credit card required • 7-day free trial</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <footer class="bg-white border-t border-[var(--border-light)] text-[var(--text-p-light)]">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start md:col-span-2 lg:col-span-2">
+                     <a href="../../index.html" class="text-2xl font-bold logo-text flex items-center gap-2 mb-4">
+                         <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                         <span>ChefOS</span>
+                     </a>
+                    <p class="text-sm mb-4">Your Kitchen, Organized. Instantly.</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <img src="../../ui/img/gdpr.png" alt="GDPR Compliant" class="h-8 w-auto">
+                        <img src="../../ui/img/pipeda.svg" alt="PIPEDA Compliant" class="h-8 w-auto">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../about/index.html" class="hover:text-gray-900">About Us</a></li>
+                        <li><a href="../legal/index.html" class="hover:text-gray-900">Privacy Policy</a></li>
+                        <li><a href="../legal/index.html" class="hover:text-gray-900">Terms of Service</a></li>
+                        <li><a href="../pricing/index.html" class="hover:text-gray-900">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../../index.html#features" class="hover:text-gray-900">Features</a></li>
+                        <li><a href="../recipe-sclaer/index.html" class="hover:text-gray-900">Recipe Scaler</a></li>
+                        <li><a href="../menus/index.html" class="hover:text-gray-900">Menu Management</a></li>
+                        <li><a href="../recipes/index.html" class="hover:text-gray-900">Recipe Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Toolkit</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../shopping/index.html" class="hover:text-gray-900">Shopping Lists</a></li>
+                        <li><a href="../calculator/index.html" class="hover:text-gray-900">Kitchen Calculator</a></li>
+                        <li><a href="../calendar/index.html" class="hover:text-gray-900">Chef Calendar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../chef/index.html" class="hover:text-gray-900">For Chefs</a></li>
+                        <li><a href="../baking/index.html" class="hover:text-gray-900">For Bakers</a></li>
+                        <li><a href="../catering/index.html" class="hover:text-gray-900">For Caterers</a></li>
+                        <li><a href="../../index.html#contact" class="hover:text-gray-900">Support</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="https://x.com/withchefos" aria-label="Twitter" class="hover:text-gray-900"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+                    <a href="https://www.instagram.com/withchefos/?hl=en" aria-label="Instagram" class="hover:text-gray-900"><i class="fa-brands fa-instagram text-xl"></i></a>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="https://www.blacnova.net/img/bn_black.png" alt="Blacnova" class="h-6 w-auto" id="footer-logo">
+                    <p class="text-sm">© 2025 ChefOS by Blacnova</p>
+                    <p class="text-sm">All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../ui.js"></script>
+    <script>
+        // Simple Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            
+            if (menu.classList.contains('hidden')) {
+                // Show menu
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Hide menu
+                menu.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Header scroll effect
+        const header = document.querySelector('header');
+        if(header){
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                    header.classList.remove('bg-transparent');
+                } else {
+                    header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                    header.classList.add('bg-transparent');
+                }
+            });
+        }
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate hero content on page load
+        gsap.fromTo('.hero-title', 
+            { opacity: 0, y: 50, scale: 0.9 },
+            { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power2.out", delay: 0.3 }
+        );
+        gsap.fromTo('.hero-subtitle', 
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 0.6 }
+        );
+        gsap.fromTo('.hero-buttons', 
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: 0.9 }
+        );
+
+        // Animate section titles on scroll
+        gsap.utils.toArray('h2').forEach((title) => {
+            gsap.fromTo(title, 
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: title,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Initialize Vanilla Tilt for FAQ items (just keeping the script placeholder)
+        if (typeof VanillaTilt !== 'undefined') {
+            document.querySelectorAll('.faq-item').forEach(item => {
+                // Logic already handled by Alpine.js on this page for a smooth toggle
+            });
+        }
+    </script>
+</body>
+</html>

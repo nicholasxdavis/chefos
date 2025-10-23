@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefOS: Interactive Dashboard Guide</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script> 
+    <script src="https://kit.fontawesome.com/a2e0a4d3f1.js" crossorigin="anonymous" defer></script> 
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> 
+    
+    <link rel="stylesheet" href="../../styles.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-green: #14b959; 
+            --brand-green-hover: #11a350;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            overscroll-behavior-y: contain; 
+        }
+        body.modal-open {
+             overflow: hidden;
+        }
+        [x-cloak] { display: none !important; }
+        
+        .guide-grid-item {
+            transition: all 0.3s ease-in-out;
+        }
+        .guide-grid-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-color: var(--brand-green);
+        }
+         .guide-item h3 {
+             transition: color 0.3s ease;
+         }
+        .guide-item:hover h3 {
+            color: var(--brand-green);
+        }
+        .icon-wrapper {
+             transition: background-color 0.3s ease, transform 0.3s ease;
+         }
+         /* Target SVG inside icon-wrapper */
+         .icon-wrapper svg {
+             transition: stroke 0.3s ease; /* Transition stroke color */
+             width: 2.25rem; /* w-9 */
+             height: 2.25rem; /* h-9 */
+             stroke: var(--brand-green); /* Use stroke for outline icons */
+             stroke-width: 1.5; /* Default stroke width for Heroicons outline */
+             fill: none; /* Ensure outline icons are not filled */
+         }
+        .guide-item:hover .icon-wrapper {
+             background-color: var(--brand-green);
+             transform: rotate(5deg) scale(1.1);
+        }
+        .guide-item:hover .icon-wrapper svg {
+             stroke: white; /* Change stroke on hover */
+        }
+        /* Header scroll effect */
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        header nav { padding-top: 1.5rem; padding-bottom: 1.5rem; transition: padding 0.3s ease; } 
+        .header-scrolled nav { padding-top: 1rem; padding-bottom: 1rem; } 
+        
+        /* Prose styles */
+        .guide-modal-content { 
+             padding: 1.5rem; 
+        }
+         @media (min-width: 768px) {
+            .guide-modal-content {
+                 padding: 2rem; 
+            }
+         }
+        .guide-modal-content ul { list-style-type: disc; margin-left: 1.25rem; margin-top: 1em; margin-bottom: 1em; padding-left: 1em; }
+        .guide-modal-content ol { list-style-type: decimal; margin-left: 1.25rem; margin-top: 1em; margin-bottom: 1em; padding-left: 1em; }
+        .guide-modal-content li { margin-top: 0.5em; margin-bottom: 0.5em; padding-left: 0.25em;}
+        .guide-modal-content strong { font-weight: 600; color: #1f2937;} 
+        .guide-modal-content p { margin-top: 0.75em; margin-bottom: 0.75em;}
+        .guide-modal-content code { background-color: #f3f4f6; padding: 0.2em 0.4em; border-radius: 0.25rem; font-size: 0.875em; }
+
+         /* Modal styles */
+        .modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-panel {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        /* Style for SVG icons in modal header */
+        .modal-panel h3 svg {
+             width: 1.5rem; /* w-6 */
+             height: 1.5rem; /* h-6 */
+             stroke: var(--brand-green); /* Use stroke */
+             stroke-width: 1.5;
+             fill: none;
+        }
+         /* Style for SVGs in "Other Ways to Get Help" */
+         .other-help-card svg {
+              width: 2.5rem; /* w-10 */
+              height: 2.5rem; /* h-10 */
+              color: var(--brand-green); /* Use color for potential fill/stroke consistency */
+              margin-bottom: 0.75rem; /* mb-3 */
+              margin-left: auto;
+              margin-right: auto;
+              stroke: var(--brand-green); /* Explicitly set stroke */
+              stroke-width: 1.5;
+              fill: none;
+         }
+
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ isModalOpen: false, activeGuide: null }" :class="{ 'modal-open': isModalOpen }">
+
+    <header class="header fixed top-0 left-0 w-full z-50 transition-colors duration-300">
+         <nav class="container mx-auto px-6 flex justify-between items-center">
+             <div class="flex-1 flex justify-start">
+                 <a href="../../index.html" class="text-2xl font-bold logo-text flex items-center gap-3 text-gray-900">
+                     <img src="../../ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
+                     <span>ChefOS</span>
+                 </a>
+             </div>
+             <div class="hidden md:flex justify-center items-center space-x-8 font-medium text-gray-600">
+                <a href="../../index.html#features" class="hover:text-gray-900 transition-colors duration-300">Features</a>
+                <a href="../pricing/index.html" class="hover:text-gray-900 transition-colors duration-300">Pricing</a>
+                <a href="../faq/index.html" class="hover:text-gray-900 transition-colors duration-300">FAQ</a>
+                <a href="#" class="text-gray-900 font-bold border-b-2 border-[var(--brand-green)] pb-1 transition-colors duration-300">Help</a>
+                <a href="#contact-form" class="hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+             <div class="flex-1 flex justify-end items-center space-x-2">
+                 <a href="../dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-5 py-2 rounded-full font-medium text-sm header-cta hidden md:inline-flex">
+                     Dashboard
+                 </a>
+                 <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                     </svg>
+                 </button>
+             </div>
+         </nav>
+        
+         <div id="mobile-menu" class="md:hidden fixed inset-0 z-[9999] hidden h-screen w-screen">
+             <div class="absolute inset-0 bg-black/60 w-full h-full" onclick="toggleMobileMenu()"></div>
+             <div class="absolute right-0 top-0 h-screen w-80 max-w-[90vw] bg-white shadow-2xl z-[10000]">
+                 <div class="h-screen flex flex-col bg-white">
+                     <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                         <a href="../../index.html" class="flex items-center gap-3">
+                             <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                             <span class="text-xl font-bold text-gray-900">ChefOS</span>
+                         </a>
+                         <button onclick="toggleMobileMenu()" class="p-2">
+                             <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                             </svg>
+                         </button>
+                     </div>
+                    
+                     <nav class="flex-1 px-6 py-4 space-y-2 overflow-y-auto">
+                        <a href="../../index.html#features" class="block py-3 px-4 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-[var(--brand-green)]" onclick="toggleMobileMenu()">Features</a>
+                        <a href="../pricing/index.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-[var(--brand-green)]" onclick="toggleMobileMenu()">Pricing</a>
+                        <a href="../faq/index.html" class="block py-3 px-4 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-[var(--brand-green)]" onclick="toggleMobileMenu()">FAQ</a>
+                        <a href="#" class="block py-3 px-4 rounded-lg text-lg font-bold text-[var(--brand-green)] bg-gray-100" onclick="toggleMobileMenu()">Help</a>
+                        <a href="#contact-form" class="block py-3 px-4 rounded-lg text-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-[var(--brand-green)]" onclick="toggleMobileMenu()">Contact</a>
+                     </nav>
+                    
+                     <div class="px-6 py-4 border-t border-gray-100">
+                         <a href="../dashboard/index.html" class="w-full bg-gradient-to-r from-[var(--brand-green)] to-green-600 hover:from-green-600 hover:to-[var(--brand-green)] text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                             Go to Dashboard
+                         </a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </header>
+
+    <main>
+        <section id="help-guide" class="pt-32 pb-20 md:pt-40 md:pb-32 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto"> 
+                    <div class="text-center mb-16">
+                         <div class="flex justify-center mb-6">
+                             <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center shadow-lg">
+                                <svg class="w-10 h-10 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+                                </svg>
+                             </div>
+                         </div>
+                         <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6"> 
+                             Dashboard Guide
+                         </h2>
+                         <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                             Click on a feature below to learn more about the professional management modules in your dashboard.
+                         </p>
+                     </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                         
+                         <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                              @click="activeGuide = 'recipes'; isModalOpen = true">
+                             <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                </svg>
+                             </div>
+                             <h3 class="font-semibold text-lg text-gray-900 mb-1">Recipes & Scaler</h3>
+                             <p class="text-sm text-gray-500">Manage, create, and scale your recipes.</p>
+                         </div>
+
+                        <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                              @click="activeGuide = 'menus'; isModalOpen = true">
+                             <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                </svg>
+                             </div>
+                             <h3 class="font-semibold text-lg text-gray-900 mb-1">Menus & PDFs</h3>
+                             <p class="text-sm text-gray-500">Organize menus and store documents.</p>
+                         </div>
+
+                        <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                              @click="activeGuide = 'shopping'; isModalOpen = true">
+                             <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                </svg>
+                             </div>
+                             <h3 class="font-semibold text-lg text-gray-900 mb-1">Shopping & Markets</h3>
+                             <p class="text-sm text-gray-500">Generate lists and manage suppliers.</p>
+                         </div>
+
+                         <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                              @click="activeGuide = 'calculator'; isModalOpen = true">
+                             <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
+                                </svg>
+                             </div>
+                             <h3 class="font-semibold text-lg text-gray-900 mb-1">Kitchen Calculator</h3>
+                             <p class="text-sm text-gray-500">Conversions and kitchen math.</p>
+                         </div>
+                         
+                         <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                             @click="activeGuide = 'calendar'; isModalOpen = true">
+                            <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-semibold text-lg text-gray-900 mb-1">My Calendar</h3>
+                            <p class="text-sm text-gray-500">Plan schedules and tasks.</p>
+                        </div>
+
+                        <div class="guide-grid-item guide-item bg-white border border-gray-200 rounded-xl shadow-sm cursor-pointer p-6 flex flex-col items-center text-center" 
+                              @click="activeGuide = 'settings'; isModalOpen = true">
+                             <div class="icon-wrapper w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243 1.106-.188 1.488l-.49.43c-.42.37-.547.96-.34 1.465l.207.502c.207.505.158 1.07-.14 1.51l-.49.43c-.43.382-.524 1.018-.188 1.488l.294.41c.337.47.927.616 1.397.28l.737-.527c.35-.25.807-.272 1.205-.108.396.166.71.506.78.93l.149.894c.09.542.56.94 1.11.94h1.093c.55 0 1.02-.398 1.11-.94l.149-.894c.07-.424.384-.764.78-.93.398-.164.855-.142 1.205.108l.737.527c.47.336 1.06.176 1.397-.28l.294-.41c.337-.47.243-1.106-.188-1.488l-.49-.43c-.42-.37-.547-.96-.34-1.465l.207-.502c.207-.505.158-1.07-.14-1.51l-.49-.43c-.43-.382-.524-1.018-.188-1.488l.294-.41c.337-.47.927-.616 1.397-.28l.737.527c.35.25.807.272 1.205.108.396-.166.71-.506.78-.93l.149-.894c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243 1.106-.188 1.488l-.49.43c-.42.37-.547.96-.34 1.465l.207.502c.207.505.158 1.07-.14 1.51l-.49.43c-.43.382-.524 1.018-.188 1.488l.294.41c.337.47.927.616 1.397.28l.737.527c.35.25.807.272 1.205.108.396.166.71.506.78.93l.149.894c.09.542.56.94 1.11.94h1.093c.55 0 1.02-.398 1.11-.94l.149-.894c.07-.424.384-.764.78-.93.398-.164.855-.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243-1.106-.188-1.488l-.49-.43c-.42-.37-.547-.96-.34-1.465l.207-.502c.207-.505.158-1.07-.14-1.51l-.49-.43c-.43-.382-.524-1.018-.188-1.488l.294-.41c.337-.47.927-.616 1.397-.28l.737.527c.35.25.807.272 1.205.108.396.166.71.506.78.93l.149.894ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
+                                </svg>
+                             </div>
+                             <h3 class="font-semibold text-lg text-gray-900 mb-1">Settings & Billing</h3>
+                             <p class="text-sm text-gray-500">Customize app and manage account.</p>
+                         </div>
+
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-form" class="py-20 md:py-32 bg-white">
+             <div class="container mx-auto px-6">
+                 <div class="max-w-4xl mx-auto">
+                     <div class="text-center mb-16">
+                         <div class="flex justify-center mb-6">
+                              <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center shadow-lg">
+                                  <svg class="w-8 h-8 text-[var(--brand-green)]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                                      <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                                  </svg>
+                              </div>
+                          </div>
+                          <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+                              Contact Our Support Team
+                          </h2>
+                          <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                              Fill out the form below, and we'll get back to you within 24 hours.
+                          </p>
+                      </div>
+
+                     <div class="bg-gray-50 p-8 md:p-12 border border-gray-200 rounded-2xl shadow-xl">
+                          <form action="#" method="POST" class="space-y-6">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                  <div class="form-control">
+                                      <label for="name" class="label block mb-2">
+                                          <span class="label-text font-semibold text-gray-700">Your Name</span>
+                                      </label>
+                                      <input type="text" id="name" name="name" class="input w-full" placeholder="Nicholas Davis" required>
+                                  </div>
+                                  <div class="form-control">
+                                      <label for="email" class="label block mb-2">
+                                          <span class="label-text font-semibold text-gray-700">Email Address</span>
+                                      </label>
+                                      <input type="email" id="email" name="email" class="input w-full" placeholder="contact@chefos.app" required>
+                                  </div>
+                              </div>
+                             
+                              <div class="form-control">
+                                  <label for="subject" class="label block mb-2">
+                                      <span class="label-text font-semibold text-gray-700">Subject</span>
+                                  </label>
+                                  <select id="subject" name="subject" class="select w-full" required>
+                                      <option value="" disabled selected>Select a subject...</option>
+                                      <option value="Technical Support (Bugs/Errors)">Technical Support (Bugs/Errors)</option>
+                                      <option value="Feature Request/Suggestion">Feature Request/Suggestion</option>
+                                      <option value="Billing/Subscription Inquiry">Billing/Subscription Inquiry</option>
+                                      <option value="General Question">General Question</option>
+                                      <option value="Data & Privacy Inquiry">Data & Privacy Inquiry</option>
+                                  </select>
+                              </div>
+
+                             <div class="form-control">
+                                  <label for="message" class="label block mb-2">
+                                      <span class="label-text font-semibold text-gray-700">Your Message / Details</span>
+                                  </label>
+                                  <textarea id="message" name="message" class="message-textarea w-full" placeholder="Describe the issue or your question in detail..." required></textarea>
+                              </div>
+
+                             <div class="card-actions justify-center pt-4">
+                                  <button type="submit" class="glow-btn special-button btn-hover md:w-auto px-10 py-4 rounded-full font-bold text-lg shadow-lg">
+                                      Send Message
+                                  </button>
+                              </div>
+                          </form>
+                      </div>
+
+                     <div class="mt-16 text-center">
+                          <h3 class="text-2xl font-bold text-gray-900 mb-8">Other Ways to Get Help</h3>
+                          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                             
+                              <div class="other-help-card p-6 bg-white border border-gray-200 rounded-2xl shadow-md transition-all hover:shadow-lg hover:border-[var(--brand-green)]">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                                  </svg>
+                                  <h4 class="font-bold text-xl text-gray-900 mb-2">Knowledge Base</h4>
+                                  <p class="text-sm text-gray-600 mb-4">Quickly find answers to common questions and technical issues in our detailed FAQ section.</p>
+                                  <a href="../faq/index.html" class="text-base font-semibold text-[var(--brand-green)] hover:underline mt-2 inline-flex items-center gap-1">
+                                      Go to FAQ 
+                                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                  </a>
+                              </div>
+                             
+                              <div class="other-help-card p-6 bg-white border border-gray-200 rounded-2xl shadow-md transition-all hover:shadow-lg hover:border-[var(--brand-green)]">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                  </svg>
+                                  <h4 class="font-bold text-xl text-gray-900 mb-2">Privacy & Legal</h4>
+                                  <p class="text-sm text-gray-600 mb-4">Questions about data security, local storage, privacy policies, or terms of service.</p>
+                                  <a href="../legal/index.html" class="text-base font-semibold text-[var(--brand-green)] hover:underline mt-2 inline-flex items-center gap-1">
+                                      View Legal Docs
+                                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                  </a>
+                              </div>
+                             
+                              <div class="other-help-card p-6 bg-white border border-gray-200 rounded-2xl shadow-md transition-all hover:shadow-lg hover:border-[var(--brand-green)]">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9 6.75L2.25 6.75" />
+                                  </svg>
+                                  <h4 class="font-bold text-xl text-gray-900 mb-2">Direct Email</h4>
+                                  <p class="text-sm text-gray-600 mb-4">For urgent, complex, or business-related inquiries that require direct communication.</p>
+                                  <a href="mailto:nic@blacnova.net" class="text-base font-semibold text-[var(--brand-green)] hover:underline mt-2 inline-block">nic@blacnova.net</a>
+                              </div>
+                          </div>
+                      </div>
+                 </div>
+             </div>
+         </section>
+        
+        </main>
+
+     <div x-cloak x-show="isModalOpen" 
+         x-transition:enter="modal-overlay ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="modal-overlay ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @keydown.escape.window="isModalOpen = false" 
+         class="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm modal-overlay">
+        
+        <div x-show="isModalOpen"
+             x-transition:enter="modal-panel ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="modal-panel ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             @click.outside="isModalOpen = false"
+             class="relative bg-white rounded-xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col modal-panel">
+            
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
+                <h3 class="font-semibold text-xl text-gray-900 flex items-center gap-3">
+                    <template x-if="activeGuide === 'recipes'">
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                       </svg>
+                    </template>
+                     <template x-if="activeGuide === 'menus'">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                         </svg>
+                     </template>
+                     <template x-if="activeGuide === 'shopping'">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                          </svg>
+                     </template>
+                     <template x-if="activeGuide === 'calculator'">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" />
+                          </svg>
+                     </template>
+                     <template x-if="activeGuide === 'calendar'">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                          </svg>
+                     </template>
+                    <template x-if="activeGuide === 'settings'">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243 1.106-.188 1.488l-.49.43c-.42.37-.547.96-.34 1.465l.207.502c.207.505.158 1.07-.14 1.51l-.49.43c-.43.382-.524 1.018-.188 1.488l.294.41c.337.47.927.616 1.397.28l.737-.527c.35-.25.807-.272 1.205-.108.396.166.71-.506.78-.93l.149.894c.09.542.56.94 1.11.94h1.093c.55 0 1.02-.398 1.11-.94l.149-.894c.07-.424.384-.764.78-.93.398-.164.855-.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243-1.106-.188-1.488l-.49-.43c-.42-.37-.547-.96-.34-1.465l.207-.502c.207-.505.158-1.07-.14-1.51l-.49-.43c-.43-.382-.524-1.018-.188-1.488l.294-.41c.337-.47.927-.616 1.397-.28l.737.527c.35.25.807.272 1.205.108.396.166.71.506.78.93l.149.894c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527c.47-.336 1.06-.176 1.397.28l.294.41c.337.47.243-1.106-.188-1.488l-.49-.43c-.42-.37-.547-.96-.34-1.465l.207-.502c.207-.505.158-1.07-.14-1.51l-.49-.43c-.43-.382-.524-1.018-.188-1.488l.294-.41c.337-.47.927-.616 1.397-.28l.737.527c.35.25.807.272 1.205.108.396.166.71.506.78.93l.149.894ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
+                         </svg>
+                     </template>
+                    <span x-text="
+                        activeGuide === 'recipes' ? 'Recipes & Scaler Guide' :
+                        activeGuide === 'menus' ? 'Menus & PDFs Guide' :
+                        activeGuide === 'shopping' ? 'Shopping & Markets Guide' :
+                        activeGuide === 'calculator' ? 'Kitchen Calculator Guide' :
+                        activeGuide === 'calendar' ? 'My Calendar Guide' :
+                        activeGuide === 'settings' ? 'Settings & Billing Guide' : 'Guide'
+                    "></span>
+                </h3>
+                <button @click="isModalOpen = false" class="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex-grow overflow-y-auto guide-modal-content">
+                <template x-if="activeGuide === 'recipes'">
+                    <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                         <p>This module is the core of ChefOS, combining a powerful scaling tool with a complete recipe database.</p>
+                        
+                        <p><strong>Recipe Scaler (Default Page)</strong></p>
+                        <ul>
+                            <li><strong>How it Works:</strong> Paste your recipe text into the 'Recipe Ingredients' box. The parser is smart and understands formats like <code>2 cups flour</code> and <code>Flour - 2 cups</code>.</li>
+                            <li><strong>Scaling:</strong> Enter the recipe's 'Original Yield' and your 'Desired Yield', then press 'Scale Recipe'. The output will show the newly calculated amounts.</li>
+                            <li><strong>Import Button:</strong> Use this to open a modal and select one of your 'My Recipes' to load directly into the scaler.</li>
+                            <li><strong>Actions:</strong> Once scaled, you can <strong>Save</strong> the recipe (which saves it to 'My Recipes'), <strong>Download</strong> (TXT/PDF), or <strong>Print</strong>.</li>
+                        </ul>
+
+                        <p><strong>My Recipes (Recipe Database)</strong></p>
+                        <ul>
+                            <li><strong>Add Recipe:</strong> Click 'Add Recipe' to open a dedicated form. Here you can add a name, yield, unit (e.g., "portions", "loaves"), ingredients, instructions, and an <strong>image (max 5MB)</strong>.</li>
+                            <li><strong>Manage Recipes:</strong> Your saved recipes appear as cards. You can:
+                                <ul>
+                                    <li><strong>Scale:</strong> Loads the recipe into the 'Recipe Scaler' page.</li>
+                                    <li><strong>Edit:</strong> Opens the same 'Add Recipe' form pre-filled with the recipe's data for you to modify.</li>
+                                    <li><strong>Delete:</strong> Asks for confirmation before permanently deleting the recipe.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Security:</strong> If PIN Protection is enabled in Settings, all actions (Add, Edit, Delete) will require you to enter your PIN.</li>
+                        </ul>
+                    </div>
+                </template>
+                
+                <template x-if="activeGuide === 'menus'">
+                    <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                         <p>This section is split into two parts: building menus from your recipes, and storing standalone PDF/document files.</p>
+                        
+                        <p><strong>My Menus (menus-page)</strong></p>
+                        <ul>
+                            <li><strong>Purpose:</strong> To group your saved recipes into complete menus (e.g., "Dinner Service," "Event Menu," "Weekly Specials").</li>
+                            <li><strong>New Menu:</strong> This button opens a form where you give the menu a name and description, then select which recipes from your 'My Recipes' list to include.</li>
+                            <li><strong>Manage Menus:</strong> Each menu card shows its name, description, and recipe count.
+                                <ul>
+                                    <li><strong>View:</strong> Opens a popup showing all recipes in that menu. From here, you can <strong>Export</strong> the entire menu (recipes and all) to TXT or PDF.</li>
+                                    <li><strong>Edit:</strong> Allows you to change the menu's name/description and add or remove recipes.</li>
+                                    <li><strong>Delete:</strong> Permanently deletes the menu (but not the recipes inside it).</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <p><strong>PDF Management (pdf-management-page)</strong></p>
+                        <ul>
+                            <li><strong>Purpose:</strong> This is a separate file cabinet for your kitchen. It is <strong>not</strong> linked to the recipe-based menus. Use this to store your final, designed menu PDFs, supplier price lists, health reports, or any other important document.</li>
+                            <li><strong>Upload PDF:</strong> Click 'Upload PDF' to add a new PDF document (max file size is 10MB).</li>
+                            <li><strong>Manage PDFs:</strong> Each PDF is shown on a card with its file name and size.
+                                <ul>
+                                    <li><strong>Download:</strong> Downloads the PDF file directly to your device.</li>
+                                    <li><strong>Delete:</strong> Permanently deletes the PDF file from the app.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </template>
+
+                 <template x-if="activeGuide === 'shopping'">
+                    <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                         <p>This module helps you build, organize, and cost your procurement lists, and manage supplier information.</p>
+                        
+                        <p><strong>My Shopping List (shopping-page)</strong></p>
+                        <ul>
+                            <li><strong>Adding Items (3 Ways):</strong>
+                                <ol>
+                                    <li><strong>From Recipes:</strong> Click 'From Recipes' to select one or more saved recipes. The app will automatically parse all ingredients and add them to the list, grouped by category.</li>
+                                    <li><strong>Add Item (Manual):</strong> Click 'Add Item' to open a popup. You can add an item name, quantity (e.g., "2 cases"), optional price, and assign it to a category.</li>
+                                    <li><strong>Smart Categorization:</strong> When adding from recipes, ingredients like "flour" or "chicken" are auto-categorized into 'Pantry' or 'Proteins'.</li>
+                                </ol>
+                            </li>
+                            <li><strong>Managing Categories:</strong> Click 'Categories' to open a manager where you can add, edit, or delete your own custom categories (e.g., "Paper Goods", "Chemicals"). You cannot delete the default system categories.</li>
+                            <li><strong>Cost Tracking:</strong> When you add a price to an item, it contributes to the <strong>Subtotal</strong> at the bottom. This subtotal only calculates <strong>unchecked</strong> items, allowing you to see your cart's value as you shop.</li>
+                            <li><strong>Actions:</strong> You can check off items as you buy them, 'Clear Checked' to remove all checked items, or 'Export List' to get a TXT/PDF copy.</li>
+                        </ul>
+
+                        <p><strong>My Markets (saved-stores-page)</strong></p>
+                        <ul>
+                            <li><strong>Purpose:</strong> A digital address book for your suppliers, vendors, and markets.</li>
+                            <li><strong>Functionality:</strong> Click 'Add Market' to save a supplier's Name, Address, Phone, and extra Notes (like contact person, delivery days, or account number).</li>
+                            <li><strong>Actions:</strong> You can <code>Edit</code> or <code>Delete</code> existing markets, or <code>Export</code> your entire list.</li>
+                        </ul>
+                    </div>
+                </template>
+
+                <template x-if="activeGuide === 'calculator'">
+                     <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                        <p>This is a specialized calculator designed for rapid kitchen calculations, combining standard math with powerful unit and density conversions.</p>
+                        
+                        <p><strong>Basic Functions</strong></p>
+                        <ul>
+                            <li><strong>Math:</strong> Use <code>+</code>, <code>-</code>, <code>×</code>, <code>÷</code> for standard arithmetic. Press <code>C</code> to clear everything.</li>
+                            <li><strong>Unit Buttons:</strong> Pressing a unit button (e.g., <code>g</code>, <code>cup</code>, <code>oz</code>) "tags" the number. For example: <code>250</code> -> <code>g</code> -> <code>250 g</code>.</li>
+                            <li><strong>Memory:</strong> <code>MC</code> clears memory, <code>MR</code> recalls the memory value, and <code>M+</code> adds the current display value to memory.</li>
+                        </ul>
+                        
+                        <p><strong>Conversion Functions (The Power Features)</strong></p>
+                        <ul>
+                            <li><strong><code>conv</code> (Simple Conversion):</strong> This button performs a standard conversion to the next logical unit.
+                                <ul>
+                                    <li><code>g</code> -> <code>oz</code> | <code>oz</code> -> <code>lb</code> | <code>lb</code> -> <code>kg</code> | <code>kg</code> -> <code>g</code></li>
+                                    <li><code>cup</code> -> <code>ml</code> | <code>ml</code> -> <code>l</code> | <code>l</code> -> <code>tbsp</code> | <code>tbsp</code> -> <code>tsp</code> | <code>tsp</code> -> <code>cup</code></li>
+                                    <li>If you try to convert between weight and volume (e.g., <code>g</code> -> <code>cup</code>), <code>conv</code> will use the density of <strong>water (1.0 g/ml)</strong>.</li>
+                                </ul>
+                            </li>
+                            <li><strong><code>of</code> (Density Conversion):</strong> This is for accurately converting weight to volume (or vice-versa).
+                                <ol>
+                                    <li>Enter your value and unit (e.g., <code>250 g</code>).</li>
+                                    <li>Press the <strong><code>of</code></strong> button. The display will show <code>Convert 250 g of...</code></li>
+                                    <li>A modal opens listing all available ingredients (built-in and custom).</li>
+                                    <li>Select an ingredient, like <strong>'flour'</strong>.</li>
+                                    <li>The calculator automatically converts <code>250 g</code> of flour to its volume in <code>cups</code> (or <code>ml</code> to <code>g</code>) using its stored density value.</li>
+                                </ol>
+                            </li>
+                            <li><strong>Custom Densities:</strong> You can add your own ingredient densities (in g/ml) via the <strong>Settings -> Calculator Ingredients</strong> manager.</li>
+                        </ul>
+                    </div>
+                </template>
+                
+                <template x-if="activeGuide === 'calendar'">
+                     <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                         <p>The Calendar helps you schedule and visualize your kitchen's operations, from daily prep tasks to weekly menu rotations.</p>
+
+                        <p><strong>Core Features</strong></p>
+                        <ul>
+                            <li><strong>Views:</strong> Toggle between a 'Month' view for long-term planning and a 'Week' view for a detailed daily breakdown.</li>
+                            <li><strong>Navigation:</strong> Use the 'Today', 'Prev', and 'Next' buttons to move through time.</li>
+                            <li><strong>Quick Stats:</strong> The cards at the bottom show you at a glance how many items are planned for 'This Week', 'This Month', and the 'Upcoming' 7 days.</li>
+                        </ul>
+
+                        <p><strong>How to Add Events</strong></p>
+                        <ol>
+                            <li>Click on any day in the 'Month' view (or the '+' button on a day in 'Week' view).</li>
+                            <li>A modal will appear for that specific date.</li>
+                            <li>Use the 'Select type...' dropdown to choose what you want to schedule:
+                                <ul>
+                                    <li><strong>Recipe:</strong> Select a specific recipe from your 'My Recipes' database.</li>
+                                    <li><strong>Menu:</strong> Select a complete menu from your 'My Menus' database.</li>
+                                    <li><strong>Note/Task:</strong> Type in a custom task (e.g., "Order dry goods," "Staff meeting," "Deep clean walk-in").</li>
+                                </ul>
+                            </li>
+                            <li><strong>(Optional) Meal Time:</strong> You can assign the item to a specific time, like 'Prep/Mise en Place', 'Lunch Service', or 'Dinner Service' for better organization.</li>
+                            <li>Click 'Add to Day'. Your event will now appear on the calendar, and the stats will update.</li>
+                        </ol>
+                     </div>
+                </template>
+
+                 <template x-if="activeGuide === 'settings'">
+                     <div class="prose prose-sm md:prose-base max-w-none text-gray-700 space-y-3">
+                        <p>This is the control center for your ChefOS app. Here you can manage data, security, and appearance.</p>
+                        
+                        <p><strong>Settings Tab (settings-page)</strong></p>
+                        <ul>
+                            <li><strong>Data Storage Location:</strong> Choose between <strong>Local Device</strong> (data stays 100% private on your computer's browser) or <strong>ChefOS Cloud</strong> (syncs your data securely, part of the Pro plan). <strong>Warning:</strong> Clearing browser data deletes local storage! Use the backup feature regularly if storing locally.</li>
+                            <li><strong>Data Protection:</strong> Set a 4-6 digit PIN. You can require this PIN for accessing the app on entry, managing Recipes/Menus, or managing Shopping/Markets. Set how long the app 'remembers' your PIN entry (e.g., 15 minutes) before requiring it again.</li>
+                            <li><strong>Calculator Ingredients:</strong> Manage custom ingredient densities (g/ml). Add ingredients not in the built-in list (e.g., 'almond milk') with their specific density to ensure accurate weight-to-volume conversions using the calculator's 'of' button.</li>
+                            <li><strong>Data Export & Backup:</strong> Download a single JSON file containing all your app data (recipes, menus, shopping lists, markets, PDFs, settings). Essential for migrating devices or manual backups.</li>
+                            <li><strong>Language:</strong> Choose your preferred language for the interface.</li>
+                            <li><strong>Display Mode:</strong> Toggle Dark Mode. You can also hide the 'PRO' badges in the sidebar for a cleaner look.</li>
+                            <li><strong>Font Family:</strong> Select the interface font (Manrope, Inter, System, Poppins).</li>
+                            <li><strong>Theme Selection:</strong> Choose a color theme (Forest, Ocean, Sunset, Midnight, Light, Rose).</li>
+                        </ul>
+
+                        <p><strong>Billing Tab (billing-page)</strong></p>
+                        <ul>
+                            <li>Check your current subscription plan (Trial or Professional) and its status.</li>
+                            <li>View your account email, when you subscribed, and the date of your next bill (if applicable).</li>
+                        </ul>
+
+                        <p><strong>Sign Out</strong></p>
+                        <ul>
+                            <li>Securely logs you out. Find it in the sidebar footer (desktop) or within the Settings options (mobile).</li>
+                        </ul>
+                    </div>
+                </template>
+
+            </div>
+
+             <div class="flex justify-end p-4 border-t border-gray-200 flex-shrink-0">
+                 <button @click="isModalOpen = false" class="glow-btn special-button btn-hover px-5 py-2 rounded-full font-medium text-sm">
+                     Close
+                 </button>
+             </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-[var(--border-light)] text-[var(--text-p-light)]">
+        <div class="container mx-auto px-6 py-16">
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 text-center md:text-left">
+                 <div class="flex flex-col items-center md:items-start md:col-span-2 lg:col-span-2">
+                      <a href="../../index.html" class="text-2xl font-bold logo-text flex items-center gap-2 mb-4 text-gray-900">
+                           <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                           <span>ChefOS</span>
+                       </a>
+                     <p class="text-sm mb-4">Your Production, Organized. Instantly.</p>
+                     <div class="flex items-center gap-3 mt-2">
+                         <img src="../../ui/img/gdpr.png" alt="GDPR Compliant" class="h-8 w-auto">
+                         <img src="../../ui/img/pipeda.svg" alt="PIPEDA Compliant" class="h-8 w-auto">
+                     </div>
+                 </div>
+                 <div>
+                     <h3 class="font-semibold text-[var(--brand-green)] mb-3">Company</h3>
+                     <ul class="space-y-2">
+                         <li><a href="../about/index.html" class="hover:text-gray-900">About Us</a></li>
+                         <li><a href="../legal/index.html" class="hover:text-gray-900">Privacy Policy</a></li>
+                         <li><a href="../legal/index.html" class="hover:text-gray-900">Terms of Service</a></li>
+                         <li><a href="../pricing/index.html" class="hover:text-gray-900">Pricing</a></li>
+                     </ul>
+                 </div>
+                 <div>
+                     <h3 class="font-semibold text-[var(--brand-green)] mb-3">Product</h3>
+                     <ul class="space-y-2">
+                         <li><a href="../../index.html#features" class="hover:text-gray-900">Features</a></li>
+                        <li><a href="../dashboard/index.html#scaler" class="hover:text-gray-900">Recipe Scaler</a></li>
+                        <li><a href="../dashboard/index.html#menus" class="hover:text-gray-900">Menu Management</a></li>
+                        <li><a href="../dashboard/index.html#recipes" class="hover:text-gray-900">Recipe Management</a></li>
+                    </ul>
+                 </div>
+                 <div>
+                     <h3 class="font-semibold text-[var(--brand-green)] mb-3">Toolkit</h3>
+                     <ul class="space-y-2">
+                        <li><a href="../dashboard/index.html#shopping" class="hover:text-gray-900">Shopping Lists</a></li>
+                        <li><a href="../dashboard/index.html#calculator" class="hover:text-gray-900">Kitchen Calculator</a></li>
+                        <li><a href="../dashboard/index.html#calendar" class="hover:text-gray-900">Chef Calendar</a></li>
+                    </ul>
+                 </div>
+                 <div>
+                     <h3 class="font-semibold text-[var(--brand-green)] mb-3">Resources</h3>
+                     <ul class="space-y-2">
+                         <li><a href="../chef/index.html" class="hover:text-gray-900">For Chefs</a></li>
+                         <li><a href="../baking/index.html" class="hover:text-gray-900">For Bakers</a></li>
+                         <li><a href="../catering/index.html" class="hover:text-gray-900">For Caterers</a></li>
+                         <li><a href="#contact-form" class="hover:text-gray-900">Support</a></li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="mt-16 text-center">
+                 <div class="flex justify-center space-x-6 mb-6">
+                     <a href="https://x.com/withchefos" aria-label="Twitter" class="hover:text-gray-900"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+                     <a href="https://www.instagram.com/withchefos/?hl=en" aria-label="Instagram" class="hover:text-gray-900"><i class="fa-brands fa-instagram text-xl"></i></a>
+                 </div>
+                 <div class="flex flex-col items-center justify-center gap-2">
+                     <img src="https://www.blacnova.net/img/bn_black.png" alt="Blacnova" class="h-6 w-auto" id="footer-logo">
+                     <p class="text-sm">© 2025 ChefOS by Blacnova</p>
+                     <p class="text-sm">All rights reserved.</p>
+                 </div>
+             </div>
+         </div>
+     </footer>
+
+    <script>
+         // Simple Mobile Menu Toggle
+         function toggleMobileMenu() {
+             const menu = document.getElementById('mobile-menu');
+             if (menu.classList.contains('hidden')) {
+                 menu.classList.remove('hidden');
+                 document.body.style.overflow = 'hidden'; 
+             } else {
+                 menu.classList.add('hidden');
+                 document.body.style.overflow = ''; 
+             }
+         }
+
+        // Header scroll effect
+        const header = document.querySelector('header.header'); 
+        if(header){
+            const handleScroll = () => {
+                header.classList.toggle('header-scrolled', window.scrollY > 10);
+            }
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll(); 
+        }
+        
+        // Alpine.js handles the grid and modal interaction.
+
+    </script>
+</body>
+</html>

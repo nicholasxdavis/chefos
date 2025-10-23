@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChefOS: Terms of Service & Privacy Policy</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/a2e0a4d3f1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <link rel="stylesheet" href="../../styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/rough@4.6.6/dist/rough.umd.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for legal page */
+        .chef-feature-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .hero-title {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Legal content body styling */
+        .legal-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .legal-content h4 {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .legal-content p, .legal-content ul, .legal-content ol {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: #495057;
+        }
+        .legal-content ul, .legal-content ol {
+            padding-left: 1.5rem;
+        }
+        
+        .cta-pattern-bg {
+            background-color: #14b959;
+            background-image: url("https://transparenttextures.com/patterns/60-lines.png");
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50">
+
+    <header class="header fixed top-0 left-0 w-full z-50 transition-colors duration-300">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex-1 flex justify-start">
+                <a href="../../index.html" class="text-2xl font-bold logo-text flex items-center gap-3">
+                    <img src="../../ui/img/logo.png" alt="ChefOS Logo" class="h-10 w-auto">
+                    <span>ChefOS</span>
+                </a>
+            </div>
+            <div class="hidden md:flex justify-center items-center space-x-8 font-medium">
+                <a href="../../index.html#features" class="hover:text-gray-900 transition-colors duration-300">Features</a>
+                <a href="../pricing/index.html" class="hover:text-gray-900 transition-colors duration-300">Pricing</a>
+                <a href="../faq/index.html" class="hover:text-gray-900 transition-colors duration-300">FAQ</a>
+                <a href="../help/index.html" class="hover:text-gray-900 transition-colors duration-300">Help</a>
+                <a href="../../index.html#contact" class="hover:text-gray-900 transition-colors duration-300">Contact</a>
+            </div>
+            <div class="flex-1 flex justify-end items-center space-x-2">
+                <a href="../dashboard/index.html" class="glow-btn special-button btn-hover pulse-on-hover px-5 py-2 rounded-full font-medium text-sm header-cta hidden md:inline-flex">
+                    Dashboard
+                </a>
+                <button class="md:hidden relative w-8 h-8 flex flex-col justify-center items-center group" onclick="toggleMobileMenu()">
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
+                    <span class="w-6 h-0.5 bg-gray-700 transition-all duration-300 ease-in-out transform mt-1.5 group-hover:bg-gray-900"></span>
+                </button>
+            </div>
+        </nav>
+        
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-[9999] hidden h-screen w-screen">
+            <div class="absolute inset-0 bg-black/60 w-full h-full" onclick="toggleMobileMenu()"></div>
+            
+            <div class="absolute right-0 top-0 h-screen w-80 max-w-[90vw] bg-white shadow-2xl z-[10000]">
+                <div class="h-screen flex flex-col bg-white">
+                    <div class="flex justify-between items-center px-8 py-6 bg-white border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                            <span class="text-xl font-bold text-gray-900">ChefOS</span>
+                        </div>
+                        <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-200">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <nav class="flex-1 px-8 py-4 bg-white">
+                        <div class="space-y-2">
+                            <a href="../../index.html#features" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Features</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../pricing/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Pricing</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../faq/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">FAQ</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../help/index.html" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Help</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="../../index.html#contact" class="group flex items-center justify-between py-4 px-4 rounded-2xl hover:bg-gray-50 transition-all duration-200" onclick="toggleMobileMenu()">
+                                <span class="text-lg font-medium text-gray-900 group-hover:text-[var(--brand-green)] transition-colors">Contact</span>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-[var(--brand-green)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </nav>
+                    
+                    <div class="px-8 py-6 border-t border-gray-100 bg-white">
+                        <a href="../dashboard/index.html" class="w-full bg-gradient-to-r from-[var(--brand-green)] to-green-600 hover:from-green-600 hover:to-[var(--brand-green)] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="text-white">Get Started</span>
+                        </a>
+                        <p class="text-center text-sm text-gray-500 mt-3">Free 7-day trial</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-16">
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-green-50/30"></div>
+            
+            <div class="pattern-container"></div>
+            
+            <div class="absolute inset-0 overflow-hidden opacity-30">
+                <div class="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full filter blur-3xl animate-blob"></div>
+                <div class="absolute top-40 right-20 w-96 h-96 bg-green-100 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-20 left-1/3 w-80 h-80 bg-green-200 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-7xl mx-auto text-center">
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-tight hero-title mb-6">
+                        Terms of Service &<br>Privacy Policy
+                    </h1>
+                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 hero-subtitle mb-8">
+                        Protecting your privacy and outlining the rules for using the ChefOS application. Please read carefully.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 hero-buttons">
+                        <a href="#terms-of-service" class="glow-btn special-button btn-hover pulse-on-hover w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-200">
+                            Read Terms of Service
+                        </a>
+                        <a href="#privacy-policy" class="glow-btn main-button btn-hover w-full sm:w-auto border px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-gray-100">
+                            Read Privacy Policy
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="legal-content" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto legal-content">
+                    
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter section-title mb-6">
+                        Legal Documentation
+                    </h2>
+                    <p class="text-sm text-gray-500 mb-8">Last Updated: October 22, 2025</p>
+
+                    <p class="text-sm bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                        <strong>LEGAL NOTICE:</strong> The following content is generated for informational and demonstration purposes by an AI and is not valid legal advice. **Consult a licensed attorney** before relying on these terms. This document is written to be highly protective of the Company, **ChefOS by Blacnova**.
+                    </p>
+                    
+                    <h3 id="terms-of-service">1. Terms of Service ("Terms")</h3>
+                    
+                    <p>These Terms govern your use of the ChefOS Professional Edition software ("Service"), developed and owned by Blacnova ("Company," "we," "us," or "our"). By accessing or using the Service, you agree to be bound by these Terms.</p>
+
+                    <h4>1.1. Acceptance of Terms</h4>
+                    <p>By creating an account, accessing the dashboard, or using any part of the Service, you represent that you have read and agree to be bound by these Terms. If you do not agree to these Terms, you may not use the Service.</p>
+
+                    <h4>1.2. License to Use the Service</h4>
+                    <p>The Company grants you a limited, non-exclusive, non-transferable, revocable license to use the Service solely for your internal professional or personal kitchen management purposes. This license is subject to your subscription status and payment of applicable fees. Any reverse engineering or unauthorized distribution is strictly prohibited.</p>
+
+                    <h4>1.3. User Data Ownership & Storage</h4>
+                    <ul>
+                        <li><strong>Ownership:</strong> You retain all ownership rights to the recipes, menus, shopping lists, notes, and any files (e.g., PDFs) that you create or upload to the Service ("User Data").</li>
+                        <li><strong>Local-First Storage:</strong> By default, User Data is stored exclusively on your local device (browser local storage, application cache). The Company does not access or store this local data unless you explicitly enable Cloud Sync in your settings.</li>
+                        <li><strong>Data Loss Disclaimer:</strong> You acknowledge and agree that the Company is **NOT** responsible for any User Data loss resulting from clearing your device's browser cache, cookies, or local application storage, especially when the Cloud Sync feature is disabled.</li>
+                    </ul>
+
+                    <h4>1.4. Subscription, Billing, and Cancellation</h4>
+                    <ul>
+                        <li><strong>Pricing:</strong> The Service is offered under a Professional Plan for $5 per month (as detailed on the Pricing page). We reserve the right to change pricing with 30 days' notice.</li>
+                        <li><strong>Trial:</strong> New users receive a 7-day free trial. Access will terminate upon trial expiration unless a paid subscription is started.</li>
+                        <li><strong>Payment:</strong> All fees are payable in advance and are non-refundable, except as required by law.</li>
+                        <li><strong>Termination by User:</strong> You may cancel your subscription at any time via the Billing section of the dashboard. Access will continue until the end of the current billing period, after which it will terminate.</li>
+                    </ul>
+
+                    <h4>1.5. Disclaimer of Warranties (Maximum Protection)</h4>
+                    <p>THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. THE COMPANY, ON BEHALF OF ITSELF AND ITS AFFILIATES, DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY (INCLUDING RECIPE SCALING ACCURACY), AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE. YOU ASSUME ALL RISK FOR ANY DAMAGES THAT MAY RESULT FROM YOUR USE OF THE SERVICE.</p>
+
+                    <h4>1.6. Limitation of Liability</h4>
+                    <p>TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL THE COMPANY, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, SUPPLIERS, OR LICENSORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (i) YOUR ACCESS TO OR USE OF OR INABILITY TO ACCESS OR USE THE SERVICE; (ii) ANY CONDUCT OR CONTENT OF ANY THIRD PARTY ON THE SERVICE; (iii) UNAUTHORIZED ACCESS, USE, OR ALTERATION OF YOUR USER DATA OR TRANSMISSIONS. IN NO EVENT SHALL THE COMPANY'S AGGREGATE LIABILITY FOR ALL CLAIMS RELATING TO THE SERVICE EXCEED THE TOTAL AMOUNT OF FEES PAID BY YOU TO THE COMPANY DURING THE SIX (6) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM.</p>
+
+                    <h4>1.7. Indemnification</h4>
+                    <p>You agree to indemnify and hold harmless the Company and its affiliates from and against any and all claims, liabilities, damages, losses, and expenses, including reasonable attorney's fees, arising out of or in any way connected with your access to or use of the Service, your violation of these Terms, or the infringement by you of any intellectual property or other right of any person or entity.</p>
+
+                    <div class="divider my-10"></div>
+                    
+                    <h3 id="privacy-policy">2. Privacy Policy</h3>
+
+                    <p>This Privacy Policy describes how ChefOS by Blacnova ("Company") handles and protects user information collected through the ChefOS Professional Edition application ("Service").</p>
+
+                    <h4>2.1. The Principle of Local Data Storage</h4>
+                    <p>ChefOS is fundamentally a local-first application.</p>
+                    <ul>
+                        <li>**Core User Data:** All recipes, menus, shopping lists, and custom settings (like calculator densities or theme) are stored locally on your device's browser local storage. **The Company does NOT transmit or store this data on its servers.**</li>
+                        <li>**Authentication Data:** We store only your email address and subscription plan (e.g., 'trial' or 'pro') for the sole purpose of verifying your application access and managing your subscription.</li>
+                        <li>**PIN Protection:** Your access PIN is stored securely (hashed) on your local device for data protection features and is **never transmitted** to the Company.</li>
+                    </ul>
+
+                    <h4>2.2. Information We Collect (Only for Service Provision)</h4>
+                    <ul>
+                        <li>**Registration Information:** Email address and encrypted password (or PIN) for authentication.</li>
+                        <li>**Billing/Subscription Status:** Data necessary to track your plan (trial, pro) and expiry date, stored locally and potentially on a secure, third-party payment processor (not disclosed to the Company).</li>
+                        <li>**Device/Usage Data (Limited):** Basic non-identifying technical data (e.g., screen resolution, browser type) to ensure application compatibility and performance. We do not use third-party analytics trackers.</li>
+                    </ul>
+                    
+                    <h4>2.3. Data Storage and Transfers (Protecting You)</h4>
+                    <ul>
+                        <li>**No Sale of Data:** We do not sell, rent, or share any of your personal data or User Data to third parties for monetary consideration or cross-context behavioral advertising.</li>
+                        <li>**Cloud Sync (Optional):** If you choose to enable the optional Cloud Sync feature, you are electing to transfer a copy of your User Data (recipes, menus, lists, etc.) to the Company's servers for the sole purpose of enabling multi-device access and backup. This data remains confidential and is encrypted both in transit and at rest.</li>
+                        <li>**PDF Management:** Files uploaded to the PDF Management feature are encoded and stored locally by default. If Cloud Sync is enabled, these files will be backed up to the Company's servers.</li>
+                    </ul>
+
+                    <h4>2.4. Your Rights (GDPR & PIPEDA Compliance)</h4>
+                    <p>In accordance with the General Data Protection Regulation (GDPR) and the Personal Information Protection and Electronic Documents Act (PIPEDA), you have the right to:</p>
+                    <ul>
+                        <li>**Access & Portability:** Request access to the limited personal data we hold (email/plan) and export your User Data (recipes, menus, lists) directly from the dashboard.</li>
+                        <li>**Rectification:** Correct any inaccuracies in your account information (email).</li>
+                        <li>**Erasure (Right to be Forgotten):** Request the permanent deletion of your account and any User Data stored on our Cloud Sync servers. Note that User Data stored *locally* must be cleared manually from your device's browser/application storage.</li>
+                        <li>**Opt-Out:** Disable the optional Cloud Sync feature at any time to revert to local-only storage.</li>
+                    </ul>
+
+                    <h4>2.5. Changes to This Policy</h4>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+                    <p><strong>Contact Us:</strong> If you have any questions about these Terms or the Privacy Policy, please contact us at the address provided in the footer.</p>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 md:py-32 cta-pattern-bg">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
+                            <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-white mb-6" style="color: #ffffff !important;">
+                        Ready to Use ChefOS with Confidence?
+                    </h2>
+                    <p class="text-xl text-white mb-8">
+                        We prioritize data integrity and control. Start organizing your kitchen knowing your data is protected.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="../dashboard/index.html" class="glow-btn bg-white text-[var(--brand-green)] hover:bg-gray-50 w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg">
+                            Go to Dashboard
+                        </a>
+                        <a href="../pricing/index.html" class="glow-btn border-2 border-white text-white hover:bg-white hover:text-[var(--brand-green)] w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg">
+                            View Pricing
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-[var(--border-light)] text-[var(--text-p-light)]">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start md:col-span-2 lg:col-span-2">
+                     <a href="#" class="text-2xl font-bold logo-text flex items-center gap-2 mb-4">
+                         <img src="../../ui/img/logo.png" alt="ChefOS" class="w-8 h-8">
+                         <span>ChefOS</span>
+                     </a>
+                    <p class="text-sm mb-4">Your Kitchen, Organized. Instantly.</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <img src="../../ui/img/gdpr.png" alt="GDPR Compliant" class="h-8 w-auto">
+                        <img src="../../ui/img/pipeda.svg" alt="PIPEDA Compliant" class="h-8 w-auto">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../about/index.html" class="hover:text-gray-900">About Us</a></li>
+                        <li><a href="../legal/index.html" class="hover:text-gray-900">Privacy Policy</a></li>
+                        <li><a href="../legal/index.html" class="hover:text-gray-900">Terms of Service</a></li>
+                        <li><a href="../pricing/index.html" class="hover:text-gray-900">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../../index.html#features" class="hover:text-gray-900">Features</a></li>
+                        <li><a href="../recipe-sclaer/index.html" class="hover:text-gray-900">Recipe Scaler</a></li>
+                        <li><a href="../menus/index.html" class="hover:text-gray-900">Menu Management</a></li>
+                        <li><a href="../recipes/index.html" class="hover:text-gray-900">Recipe Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Toolkit</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../shopping/index.html" class="hover:text-gray-900">Shopping Lists</a></li>
+                        <li><a href="../calculator/index.html" class="hover:text-gray-900">Kitchen Calculator</a></li>
+                        <li><a href="../calendar/index.html" class="hover:text-gray-900">Chef Calendar</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[var(--brand-green)] mb-3">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../chef/index.html" class="hover:text-gray-900">For Chefs</a></li>
+                        <li><a href="../baking/index.html" class="hover:text-gray-900">For Bakers</a></li>
+                        <li><a href="../catering/index.html" class="hover:text-gray-900">For Caterers</a></li>
+                        <li><a href="../../index.html#contact" class="hover:text-gray-900">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 text-center">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="https://x.com/withchefos" aria-label="Twitter" class="hover:text-gray-900"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+                    <a href="https://www.instagram.com/withchefos/?hl=en" aria-label="Instagram" class="hover:text-gray-900"><i class="fa-brands fa-instagram text-xl"></i></a>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-2">
+                    <img src="https://www.blacnova.net/img/bn_black.png" alt="Blacnova" class="h-6 w-auto" id="footer-logo">
+                    <p class="text-sm">© 2025 ChefOS by Blacnova</p>
+                    <p class="text-sm">All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../ui.js"></script>
+    <script>
+        // Simple Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            
+            if (menu.classList.contains('hidden')) {
+                // Show menu
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Hide menu
+                menu.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Header scroll effect
+        const header = document.querySelector('header');
+        if(header){
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                    header.classList.remove('bg-transparent');
+                } else {
+                    header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                    header.classList.add('bg-transparent');
+                }
+            });
+        }
+
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate legal content for clean entrance
+        const legalSection = document.getElementById('legal-content');
+        if (legalSection) {
+            gsap.fromTo(legalSection, 
+                { 
+                    opacity: 0, 
+                    y: 30 
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power2.out",
+                    delay: 0.3
+                }
+            );
+        }
+
+        // Animate hero content for clean entrance
+        gsap.fromTo('.hero-title', 
+            { 
+                opacity: 0, 
+                y: 50,
+                scale: 0.9
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1.2,
+                ease: "power2.out",
+                delay: 0.5
+            }
+        );
+
+        gsap.fromTo('.hero-subtitle', 
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 0.8
+            }
+        );
+
+        gsap.fromTo('.hero-buttons', 
+            { 
+                opacity: 0, 
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                delay: 1.1
+            }
+        );
+
+        // --- Background SVG Icon Pattern Script for Hero Section ---
+        const heroSection = document.getElementById('hero');
+        if (heroSection) {
+            const patternContainer = heroSection.querySelector('.pattern-container');
+            if (patternContainer) {
+                const icons = [
+                    '../../ui/img/icon-1.svg', '../../ui/img/icon-2.svg', '../../ui/img/icon-3.svg',
+                    '../../ui/img/icon-4.svg', '../../ui/img/icon-5.svg', '../../ui/img/icon-6.svg',
+                    '../../ui/img/icon-7.svg', '../../ui/img/icon-8.svg', '../../ui/img/icon-9.svg'
+                ];
+                
+                const iconCount = 40; 
+                const placedIcons = []; 
+                const maxAttempts = 100; 
+                const minIconSize = 3.5; 
+                const maxIconSize = 5.5;
+                const minDistance = 12; 
+
+                for (let i = 0; i < iconCount; i++) {
+                    let attempts = 0;
+                    let placed = false;
+                    
+                    while (attempts < maxAttempts && !placed) {
+                        const x = Math.random() * 100;
+                        const y = Math.random() * 100;
+                        const size = Math.random() * (maxIconSize - minIconSize) + minIconSize;
+                        const rotation = Math.random() * 360;
+                        const opacity = Math.random() * 0.3 + 0.1;
+                        
+                        let collision = false;
+                        for (const existingIcon of placedIcons) {
+                            const distance = Math.sqrt(
+                                Math.pow(x - existingIcon.x, 2) + Math.pow(y - existingIcon.y, 2)
+                            );
+                            const sizeBasedDistance = (size + existingIcon.size) / 2;
+                            const requiredDistance = Math.max(minDistance, sizeBasedDistance);
+                            
+                            if (distance < requiredDistance) {
+                                collision = true;
+                                break;
+                            }
+                        }
+                        
+                        if (x < 5 || x > 95 || y < 5 || y > 95) {
+                            collision = true;
+                        }
+                        
+                        if (!collision) {
+                            const iconEl = document.createElement('img');
+                            iconEl.src = icons[Math.floor(Math.random() * icons.length)];
+                            iconEl.alt = ""; 
+                            iconEl.setAttribute('aria-hidden', 'true');
+                            iconEl.style.left = `${x}%`;
+                            iconEl.style.top = `${y}%`;
+                            iconEl.style.width = `${size}rem`;
+                            iconEl.style.transform = `rotate(${rotation}deg)`;
+                            iconEl.style.opacity = opacity;
+                            
+                            placedIcons.push({ x, y, size });
+                            patternContainer.appendChild(iconEl);
+                            placed = true;
+                        }
+                        
+                        attempts++;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
